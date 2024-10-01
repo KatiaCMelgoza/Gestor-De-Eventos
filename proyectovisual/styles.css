@@ -1,0 +1,90 @@
+/* Reiniciar márgenes y padding */
+body, html, ul, li, h1, h2, p, video, div, section {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Barra de navegación */
+.navbar {
+    background-color: #006068; /* Color de fondo azul del menú */
+    display: flex;
+    justify-content: space-between; /* Espacio entre el menú y las imágenes */
+    align-items: center;
+    padding: 1px 30px; /* Espacio interno */
+}
+a{text-decoration: none;}
+/* Menú principal */
+.menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* Estilo de los enlaces del menú */
+.menu li a {
+    text-decoration: none;
+    color: white; /* Color blanco para el texto */
+    padding: 15px 20px;
+    display: block;
+    font-size: 16px;
+    font-weight: 500; /* Ajuste de grosor */
+}
+
+/* Posicionar las imágenes a la derecha */
+.menu-logo {
+    margin-left: auto; /* Empujar las imágenes hacia la derecha */
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo de las imágenes en el menú */
+.menu-image {
+    height: 50px; /* Ajustar tamaño de las imágenes */
+    margin-left: 20px; /* Separación entre las imágenes */
+}
+
+/* Submenú oculto por defecto */
+.submenu {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+}
+
+.submenu li {
+    width: 200px; /* Ancho del submenú */
+}
+
+.submenu li a {
+    padding: 10px;
+    display: block;
+    text-align: left;
+    color: #333;
+}
+
+/* Mostrar el submenú cuando se hace hover */
+.menu li:hover .submenu {
+    display: block;
+}
+
+/* Efecto hover en los submenús */
+.submenu li a:hover {
+    background-color: #f0f0f0;
+}
+
+/* Sección del video */
+.video-section {
+    width: 100%;
+    margin: 0; /* Quitar márgenes */
+}
+
+/* Estilo del video para pantalla completa */
+.full-width-video {
+    width: 100vw; /* Ancho completo de la ventana del navegador */
+    height: auto; /* Altura automática */
+}
