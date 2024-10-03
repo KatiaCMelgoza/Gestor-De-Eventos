@@ -16,7 +16,7 @@ body, html, ul, li, h1, h2, p, video, div, section {
 
 /* Menú principal */
 .menu {
-    list-style: none;
+    list-style: none; /* Eliminar círculos del menú principal */
     display: flex;
     align-items: center;
     width: 100%;
@@ -38,7 +38,7 @@ body, html, ul, li, h1, h2, p, video, div, section {
 }
 
 .menu li a:hover {
-    color: white; /* Color amarillo cuando se hace hover */
+    color: white; /* Cambiar color a amarillo claro cuando se hace hover */
 }
 
 /* Submenú */
@@ -52,17 +52,32 @@ body, html, ul, li, h1, h2, p, video, div, section {
     padding: 0;
     z-index: 1; /* Asegurarse de que aparezca por encima del contenido */
     border-radius: 4px; /* Bordes redondeados para el submenú */
+    list-style: none; /* Eliminar círculos del submenú */
 }
 
 /* Estilo de los enlaces del submenú */
 .submenu li {
-    width: 180px; /* Ancho de los submenús */
+    width: 200px; /* Ancho del submenú */
+    list-style: none; /* Eliminar círculos de los elementos del submenú */
 }
 
 .submenu li a {
     padding: 10px 15px;
-    color: black; /* Texto en color azul */
+    color: #333; /* Texto en color negro */
     text-align: left;
+    display: flex; /* Alinear icono y texto en la misma fila */
+    align-items: center; /* Centrar verticalmente */
+}
+
+/* Eliminar viñetas adicionales si hubiera listas anidadas */
+.submenu li ul, .submenu li {
+    list-style: none; /* Asegurar que no haya círculos en listas adicionales */
+}
+
+.submenu li a i {
+    margin-right: 10px; /* Espacio entre el icono y el texto */
+    font-size: 18px; /* Tamaño del icono */
+    color: #006068; /* Color del icono */
 }
 
 .submenu li a:hover {
@@ -99,9 +114,10 @@ body, html, ul, li, h1, h2, p, video, div, section {
     height: auto; /* Altura automática */
 }
 
-
-
-.footer{
+/* Estilo del pie de página */
+.footer {
     background-color: #006068;
     padding: 10px;
+    text-align: center;
+    color: white;
 }
