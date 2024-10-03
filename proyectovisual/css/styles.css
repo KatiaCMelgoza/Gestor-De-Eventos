@@ -1,4 +1,4 @@
-/* Reiniciar márgenes y padding */
+/* Resetear márgenes y padding */
 body, html, ul, li, h1, h2, p, video, div, section {
     margin: 0;
     padding: 0;
@@ -7,34 +7,74 @@ body, html, ul, li, h1, h2, p, video, div, section {
 
 /* Barra de navegación */
 .navbar {
-    background-color: #006068; /* Color de fondo azul del menú */
+    background-color: #006068; /* Color de fondo del menú */
     display: flex;
-    justify-content: space-between; /* Espacio entre el menú y las imágenes */
+    justify-content: space-between;
     align-items: center;
-    padding: 1px 30px; /* Espacio interno */
+    padding: 10px 30px;
 }
-a{text-decoration: none;}
+
 /* Menú principal */
 .menu {
     list-style: none;
     display: flex;
     align-items: center;
-    margin: 0;
-    padding: 0;
     width: 100%;
+    padding: 0;
 }
 
 /* Estilo de los enlaces del menú */
-.menu li a {
-    text-decoration: none;
-    color: white; /* Color blanco para el texto */
-    padding: 15px 20px;
-    display: block;
-    font-size: 16px;
-    font-weight: 500; /* Ajuste de grosor */
+.menu li {
+    position: relative; /* Posición relativa para los submenús */
+    margin: 0 15px; /* Espaciado entre elementos */
 }
 
-/* Posicionar las imágenes a la derecha */
+.menu li a {
+    text-decoration: none;
+    color: white; /* Texto blanco */
+    padding: 10px 15px;
+    display: block;
+    font-weight: 600;
+}
+
+.menu li a:hover {
+    color: white; /* Color amarillo cuando se hace hover */
+}
+
+/* Submenú */
+.submenu {
+    display: none; /* Ocultar submenús por defecto */
+    position: absolute;
+    top: 100%; /* Posicionar justo debajo del elemento padre */
+    left: 0;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 0;
+    z-index: 1; /* Asegurarse de que aparezca por encima del contenido */
+    border-radius: 4px; /* Bordes redondeados para el submenú */
+}
+
+/* Estilo de los enlaces del submenú */
+.submenu li {
+    width: 180px; /* Ancho de los submenús */
+}
+
+.submenu li a {
+    padding: 10px 15px;
+    color: black; /* Texto en color azul */
+    text-align: left;
+}
+
+.submenu li a:hover {
+    background-color: gainsboro; /* Fondo gris claro en hover */
+}
+
+/* Mostrar el submenú cuando se hace hover */
+.menu li:hover > .submenu {
+    display: block; /* Mostrar submenú al pasar el cursor */
+}
+
+/* Posicionar las imágenes al final del menú */
 .menu-logo {
     margin-left: auto; /* Empujar las imágenes hacia la derecha */
     display: flex;
@@ -47,36 +87,6 @@ a{text-decoration: none;}
     margin-left: 20px; /* Separación entre las imágenes */
 }
 
-/* Submenú oculto por defecto */
-.submenu {
-    display: none;
-    position: absolute;
-    background-color: #ffffff;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    margin-top: 10px;
-}
-
-.submenu li {
-    width: 200px; /* Ancho del submenú */
-}
-
-.submenu li a {
-    padding: 10px;
-    display: block;
-    text-align: left;
-    color: #333;
-}
-
-/* Mostrar el submenú cuando se hace hover */
-.menu li:hover .submenu {
-    display: block;
-}
-
-/* Efecto hover en los submenús */
-.submenu li a:hover {
-    background-color: #f0f0f0;
-}
-
 /* Sección del video */
 .video-section {
     width: 100%;
@@ -87,4 +97,11 @@ a{text-decoration: none;}
 .full-width-video {
     width: 100vw; /* Ancho completo de la ventana del navegador */
     height: auto; /* Altura automática */
+}
+
+
+
+.footer{
+    background-color: #006068;
+    padding: 10px;
 }
