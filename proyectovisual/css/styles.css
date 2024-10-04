@@ -8,6 +8,7 @@ body, html, ul, li, h1, h2, p, video, div, section {
 /* Barra de navegación */
 .navbar {
     background-color: #006068; /* Color de fondo del menú */
+    font-family: Arial, Helvetica, sans-serif;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -115,9 +116,87 @@ body, html, ul, li, h1, h2, p, video, div, section {
 }
 
 /* Estilo del pie de página */
+/* Footer */
 .footer {
-    background-color: #006068;
-    padding: 10px;
-    text-align: center;
-    color: white;
+    background-color: #B22222; /* Fondo rojo */
+    color: white; /* Texto en blanco */
+    padding: 20px 0; /* Espaciado interno */
+    display: flex;
+    justify-content: center; /* Centrar el contenido */
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between; /* Espacio entre secciones */
+    align-items: center;
+    width: 70%; /* Ancho del contenedor */
+    max-width: 1000px; /* Limitar el ancho máximo */
+}
+
+.footer-section {
+    flex: 1; /* Cada sección ocupa el mismo espacio */
+    padding: 0 15px; /* Separación entre secciones */
+}
+
+/* Estilo para la sección izquierda */
+.footer-left {
+    text-align: left; /* Alinear a la izquierda */
+}
+
+.footer-left p {
+    margin: 5px 0; /* Separación entre líneas */
+}
+
+/* Estilo del logo en la sección izquierda */
+.footer-logo {
+    height: 50px;
+    margin-bottom: 10px; /* Espacio entre el logo y el texto */
+}
+
+/* Estilo para la sección central */
+.footer-center {
+    text-align: center; /* Alinear al centro */
+}
+
+.footer-center p {
+    margin: 5px 0; /* Separación entre líneas */
+}
+
+/* Estilo para la sección derecha */
+.footer-right {
+    text-align: right; /* Alinear a la derecha */
+}
+
+.footer-right h3 {
+    margin-bottom: 10px; /* Espacio debajo del título */
+}
+
+.footer-right ul {
+    list-style: none; /* Eliminar viñetas */
+    padding: 0; /* Eliminar padding */
+}
+
+.footer-right li {
+    margin: 5px 0; /* Separación entre enlaces */
+}
+
+.footer-right a {
+    text-decoration: none; /* Eliminar subrayado */
+    color: white; /* Color de los enlaces */
+}
+
+.footer-right a:hover {
+    text-decoration: underline; /* Subrayar en hover */
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column; /* Cambiar a columnas en pantallas pequeñas */
+        align-items: center;
+    }
+    .footer-section {
+        text-align: center; /* Alinear todas las secciones al centro */
+        margin-bottom: 0%; /* Espacio entre secciones */
+    }
 }
