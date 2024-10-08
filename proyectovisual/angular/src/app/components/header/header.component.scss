@@ -1,0 +1,87 @@
+.navbar {
+    background-color: #005f68; /* Color de fondo del menú */
+    font-family: Arial,tahoma; /*tipografia */
+    font-size: 20px; /*tamaño*/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+}
+.menu {
+    list-style: none; /* Eliminar círculos del menú principal */
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+}
+/* Estilo de los enlaces del menú */
+.menu li {
+    position: relative; /* Posición relativa para los submenús */
+    margin: 0 15px; /* Espaciado entre elementos */
+}
+.menu li a {
+    text-decoration: none;
+    color: white; /* Texto blanco */
+    padding: 10px 15px;
+    display: block;
+    font-weight: 600;
+}
+.menu li a:hover {
+    color: white; /* Cambiar color a amarillo claro cuando se hace hover */
+}
+/* Submenú */
+.submenu {
+    display: none; /* Ocultar submenús por defecto */
+    position: absolute;
+    top: 100%; /* Posicionar justo debajo del elemento padre */
+    left: 0;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 0;
+    z-index: 1; /* Asegurarse de que aparezca por encima del contenido */
+    border-radius: 4px; /* Bordes redondeados para el submenú */
+    list-style: none; /* Eliminar círculos del submenú */
+}
+/* Estilo de los enlaces del submenú */
+.submenu li {
+    width: 200px; /* Ancho del submenú */
+    list-style: none; /* Eliminar círculos de los elementos del submenú */
+}
+.submenu li a {
+    padding: 10px 15px;
+    color: #333; /* Texto en color negro */
+    text-align: left;
+    display: flex; /* Alinear icono y texto en la misma fila */
+    align-items: center; /* Centrar verticalmente */
+}
+/* Eliminar viñetas adicionales si hubiera listas anidadas */
+.submenu li ul, .submenu li {
+    list-style: none; /* Asegurar que no haya círculos en listas adicionales */
+}
+.submenu li a i {
+    margin-right: 10px; /* Espacio entre el icono y el texto */
+    font-size: 18px; /* Tamaño del icono */
+    color: #005f68; /* Color del icono */
+}
+
+.submenu li a:hover {
+    background-color: gainsboro; /* Fondo gris claro en hover */
+}
+
+/* Mostrar el submenú cuando se hace hover */
+.menu li:hover > .submenu {
+    display: block; /* Mostrar submenú al pasar el cursor */
+}
+
+/* Posicionar las imágenes al final del menú */
+.menu-logo {
+    margin-left: auto; /* Empujar las imágenes hacia la derecha */
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo de las imágenes en el menú */
+.menu-image {
+    height: 50px; /* Ajustar tamaño de las imágenes */
+    margin-left: 20px; /* Separación entre las imágenes */
+}
