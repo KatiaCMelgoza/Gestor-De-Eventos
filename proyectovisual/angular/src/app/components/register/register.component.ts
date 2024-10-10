@@ -25,7 +25,9 @@ export class RegisterComponent implements OnInit {
 
   sendDataToService(){
     console.log(this.formUser.value)
-    this.httpService.registerUser(this.formUser.value)
+    this.httpService.registerUser(this.formUser.value).subscribe( res => {
+      console.log(res,"http")
+    })
   }
 
 }
