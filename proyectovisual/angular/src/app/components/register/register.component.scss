@@ -1,35 +1,41 @@
-body{
-    background: #f0f8ff;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+html, body {
+    height: 100%; /* Aseguramos que html y body ocupen todo el alto */
     margin: 0;
+    padding: 0;
+    display: flex; /* Usamos Grid para centrar */
+    place-items: center; /* Centrar tanto horizontal como verticalmente */
+    background: #f0f8ff; /* Color de fondo */
 }
-.formulario{
+
+.formulario {
     background: rgba(255, 255, 255, 0.9);
     border-radius: 15px;
-    padding: 30%;
+    padding: 30px; /* Aseguramos que el padding sea razonable */
     width: 100%;
-    max-width: 500%;
+    max-width: 500px; /* Limitar el ancho máximo */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border: 5px solid black;
+    box-sizing: border-box; /* Incluimos padding y border dentro del ancho */
 }
-.formulario h1{
+
+.formulario h1 {
     text-align: center;
     margin-bottom: 20px;
     font-family: Arial, Helvetica, sans-serif;
 }
-.input-contendor{
+
+.input-contenedor {
     margin-bottom: 15px;
     position: relative;
 }
-.input-contendor label{
+
+.input-contenedor label {
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
 }
-.input-contendor input{
+
+.input-contenedor input, .input-contenedor select {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -37,10 +43,12 @@ body{
     outline: none;
     transition: border 0.3s ease;
 }
-.input-contendor input:focus{
+
+.input-contenedor input:focus, .input-contenedor select:focus {
     border-color: #007bff;
 }
-.btn{
+
+.btn {
     width: 100%;
     background-color: #007bff;
     color: white;
@@ -51,16 +59,20 @@ body{
     margin-top: 20px;
     transition: background-color 0.3s ease;
 }
-.btn:hover{
+
+.btn:hover {
     background-color: #0056b3;
 }
-.link{
+
+.link {
     color: #007bff;
     text-decoration: none;
 }
-.link:hover{
+
+.link:hover {
     text-decoration: underline;
 }
-.contenedor{
+
+.contenedor {
     margin: 20px 0;
 }
