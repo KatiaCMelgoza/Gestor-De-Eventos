@@ -6,6 +6,7 @@ export const routes: Routes = [
     {path:"inicio", loadComponent: () => import("./components/banner/banner.component").then(m => m.BannerComponent)},
     {path:"registro", loadComponent: () => import("./components/register/register.component").then(m => m.RegisterComponent)},
     {path:"login", loadComponent:() => import("./components/login/login.component").then(m => m.LoginComponent)},
+    {path:"preguntas", loadComponent:() => import("./components/preguntas/preguntas.component").then(m => m.PreguntasComponent)},
     {path:"**", redirectTo:"inicio", pathMatch:"full"}
     
 ];
