@@ -1,0 +1,76 @@
+.footer {
+    background-color: #005f68; /* Fondo verde */
+    color: white; /* Texto en blanco */
+    padding: 30px 0; /* Espaciado interno */
+    display: flex;
+    justify-content: center; /* Centrar el contenido */
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between; /* Espacio entre secciones */
+    align-items: center;
+    width: 90%; /* Ancho del contenedor */
+    max-width: 1200px; /* Limitar el ancho máximo */
+}
+
+.footer-section {
+    flex: 1; /* Cada sección ocupa el mismo espacio */
+    text-align: center; /* Centrar el texto dentro de cada sección */
+    padding: 0 15px; /* Separación entre secciones */
+}
+
+/* Estilo para la sección izquierda */
+.footer-left {
+    text-align: left; /* Alinear a la izquierda */
+}
+
+.footer-left .footer-title {
+    font-size: 24px; /* Tamaño del texto "CUCEA" */
+    font-weight: bold; /* Negritas */
+}
+
+.footer-left img.footer-logo {
+    height: 60px; /* Altura del logo */
+    margin: 10px 0; /* Espacio arriba y abajo de la imagen */
+}
+
+.footer-left p {
+    margin: 5px 0; /* Separación entre líneas */
+}
+
+/* Estilo para la sección central */
+.footer-center {
+    text-align: center; /* Alinear al centro */
+}
+
+.footer-center p {
+    margin: 5px 0; /* Separación entre líneas */
+}
+
+/* Estilo para la sección derecha */
+.footer-right {
+    text-align: right; /* Alinear a la derecha */
+}
+
+.footer-right h3 {
+    margin-bottom: 10px; /* Espacio debajo del título */
+}
+
+.footer-right ul {
+    list-style: none; /* Eliminar viñetas */
+    padding: 0; /* Eliminar padding */
+}
+
+.footer-right li {
+    margin: 5px 0; /* Separación entre enlaces */
+}
+
+.footer-right a {
+    text-decoration: none; /* Eliminar subrayado */
+    color: white; /* Color de los enlaces */
+}
+
+.footer-right a:hover {
+    text-decoration: underline; /* Subrayar en hover */
+}
