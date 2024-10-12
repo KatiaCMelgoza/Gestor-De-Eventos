@@ -1,0 +1,71 @@
+.banner-container {
+    // background-image: url('../../../assets/banner-background.jpg'); /* Imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    padding: 100px 30px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+}
+
+.banner-content {
+    max-width: 800px; /* Limitar el ancho del contenido para mejor legibilidad */
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo negro semitransparente */
+    padding: 20px 40px;
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+.banner-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+.banner-subtitle {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.banner-description {
+    font-size: 18px;
+    line-height: 1.6;
+}
+/* Estilo general para los bloques */
+.card-block {
+    border-radius: 20px;
+    padding: 40px;
+    color: white;
+    font-family: Arial, sans-serif;
+    transition: transform 0.3s ease;
+}
+
+.card-block:hover {
+    transform: scale(1.05);
+}
+
+/* Bloques con diferentes colores */
+.red-block {
+    background-color: #a70232;
+}
+
+.green-block {
+    background-color: #6ec5a0;
+}
+
+.orange-block {
+    background-color: #f7a620;
+}
+
+/* Ajuste del texto y el icono */
+.card-block i {
+    color: white;
+}
+
+.card-block h3 {
+    font-weight: 700;
+    font-size: 20px;
+}

@@ -1,44 +1,50 @@
 <header>
-
-
-
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <a class="navbar-brand" routerLink="inicio">Inicio</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 menu">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#"></a>
+            <a class="nav-link active" aria-current="page" routerLink="inicio">Inicio</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Eventos
             </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Proximos Eventos</a></li>
-              <li><a class="dropdown-item" href="#">Eventos Pasados</a></li>
-              <li><hr class="dropdown-divider"></li>
+            <ul class="dropdown-menu submenu">
+              <li><a class="dropdown-item" routerLink="/proximoseventos"><i class="fas fa-calendar-alt"></i> Próximos Eventos</a></li>
+              <li><a class="dropdown-item" routerLink="/eventospasados"><i class="fas fa-history"></i> Eventos Pasados</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Calendario
             </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Registro de Evento</a></li>
+            <ul class="dropdown-menu submenu">
+              <li><a class="dropdown-item" routerLink="/registroevento"><i class="fas fa-edit"></i> Registro de Evento</a></li>
             </ul>
           </li>
         </ul>
+        <!-- Barra de búsqueda -->
         <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Buscar</button>
         </form>
+        <!-- Añadir las imágenes -->
+        <div class="menu-logo">
+          <img src="../../../assets/LogoCUCEA.png" alt="CUCEA Logo" class="menu-image">
+          <img src="../../../assets/Logo_azul.png" alt="Vive el CUCEA Logo" class="menu-image">
+        </div>
       </div>
     </div>
   </nav>
+</header>
+
+
+
     <!-- <nav class="navbar">
         <ul class="menu">
             <li><a routerLink="inicio">Inicio</a></li>
@@ -66,5 +72,5 @@
                 <img src="../../../assets/Logo_azul.png" alt="Vive el CUCEA Logo" class="menu-image">
             </div>
         </ul>
-    </nav> -->
-</header>
+    </nav> 
+</header> -->
