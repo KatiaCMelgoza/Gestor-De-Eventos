@@ -6,9 +6,9 @@ header {
 
 /* Ajuste general de la barra de navegación */
 .navbar {
-    background-color: #005f68 !important; /* Color de fondo del menú */
-    font-family: Arial, Tahoma, sans-serif; /* Tipografía */
-    font-size: 20px; /* Tamaño de la fuente */
+    background-color: #005f68 !important; 
+    font-family: Arial, Tahoma, sans-serif; 
+    font-size: 20px; 
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -40,7 +40,7 @@ header {
 
 /* Efecto hover en los enlaces del menú principal */
 .menu li:hover > a {
-    background-color: #007b8a; /* Cambiar color de fondo al pasar el mouse */
+    background-color: #007b8a; 
     color: white;
     border-radius: 4px;
 }
@@ -56,7 +56,7 @@ header {
     padding: 0;
     z-index: 1;
     border-radius: 4px;
-    min-width: 200px; /* Asegurar un tamaño mínimo para evitar problemas de hover */
+    min-width: 200px; 
 }
 
 /* Mostrar el submenú al pasar el ratón sobre el elemento principal */
