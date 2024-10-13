@@ -1,0 +1,58 @@
+.accordion-button {
+    font-weight: bold;
+    font-size: 18px;
+    color: #005f68;
+    border-radius: 30px;
+    border: 1px solid #ccc;
+}
+
+.accordion-button.collapsed {
+    color: #005f68;
+    background-color: #fff;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #f1f1f1;
+}
+
+.accordion-item {
+    border: none;
+    margin-bottom: 10px; /* Espacio entre cada sección */
+}
+
+.accordion-body {
+    font-size: 16px;
+    color: #333;
+}
+
+h2.h2, h3.h3, .parrafo {
+    color: #333;
+}
+
+h2.h2 {
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+h3.h3 {
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.parrafo {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.accordion-button::after {
+    font-size: 18px;
+    color: #005f68;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+}
+
+.accordion-button:not(.collapsed) {
+    box-shadow: none;
+}
