@@ -1,23 +1,19 @@
-/* Mantener el header sticky */
-header {
-    position: sticky;
-    top: 0;
-}
 
-/* Ajuste general de la barra de navegación */
+
+/* Barra de navegación */
 .navbar {
-    background-color: #005f68 !important; 
-    font-family: Arial, Tahoma, sans-serif; 
-    font-size: 20px; 
+    background-color: #005f68; /* Color de fondo del menú */
+    font-family: Arial, tahoma; /* Tipografía */
+    font-size: 20px; /* Tamaño */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 30px;
 }
 
-/* Ajuste de la lista del menú */
+/* Menú principal */
 .menu {
-    list-style: none;
+    list-style: none; /* Eliminar círculos del menú principal */
     display: flex;
     align-items: center;
     width: 100%;
@@ -26,69 +22,73 @@ header {
 
 /* Estilo de los enlaces del menú */
 .menu li {
-    position: relative;
-    margin: 0 15px;
+    position: relative; /* Posición relativa para los submenús */
+    margin: 0 15px; /* Espaciado entre elementos */
 }
 
 .menu li a {
     text-decoration: none;
-    color: white;
+    color: white; /* Texto blanco */
     padding: 10px 15px;
     display: block;
     font-weight: 600;
 }
 
-/* Efecto hover en los enlaces del menú principal */
-.menu li:hover > a {
-    background-color: #007b8a; 
-    color: white;
-    border-radius: 4px;
+.menu li a:hover {
+    color: white; /* Mantener el color blanco en hover */
 }
 
 /* Submenú */
 .submenu {
-    display: none;
+    display: none; /* Ocultar submenús por defecto */
     position: absolute;
-    top: 100%;
+    top: 100%; /* Posicionar justo debajo del elemento padre */
     left: 0;
     background-color: #ffffff;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     padding: 0;
-    z-index: 1;
-    border-radius: 4px;
-    min-width: 200px; 
+    z-index: 1; /* Asegurarse de que aparezca por encima del contenido */
+    border-radius: 4px; /* Bordes redondeados para el submenú */
+    list-style: none; /* Eliminar círculos del submenú */
+    min-width: 200px; /* Establecer ancho mínimo del submenú */
 }
 
-/* Mostrar el submenú al pasar el ratón sobre el elemento principal */
+/* Asegurar que no haya separación entre el menú principal y el submenú */
 .menu li:hover > .submenu {
-    display: block;
+    display: block; /* Mostrar submenú al hacer hover en el menú principal */
+}
+
+.menu li:hover > .submenu,
+.submenu:hover {
+    display: block; /* Mantener el submenú visible cuando se pasa sobre él */
 }
 
 /* Estilo de los enlaces del submenú */
 .submenu li {
-    width: 100%;
+    width: 100%; /* Asegurar que el submenú tenga ancho completo */
 }
 
 .submenu li a {
     padding: 10px 15px;
-    color: #333;
+    color: #333; /* Texto en color negro */
     text-align: left;
-    display: block;
+    display: flex; /* Alinear icono y texto en la misma fila */
+    align-items: center; /* Centrar verticalmente */
 }
 
-/* Efecto hover en los enlaces del submenú */
 .submenu li a:hover {
-    background-color: gainsboro;
+    background-color: gainsboro; /* Fondo gris claro en hover */
 }
 
-/* Ajuste de las imágenes al final del menú */
+/* Posicionar las imágenes al final del menú */
 .menu-logo {
-    margin-left: auto;
+    margin-left: auto; /* Empujar las imágenes hacia la derecha */
     display: flex;
     align-items: center;
 }
 
+/* Estilo de las imágenes en el menú */
 .menu-image {
-    height: 50px;
-    margin-left: 20px;
+    height: 50px; /* Ajustar tamaño de las imágenes */
+    margin-left: 20px; /* Separación entre las imágenes */
 }
