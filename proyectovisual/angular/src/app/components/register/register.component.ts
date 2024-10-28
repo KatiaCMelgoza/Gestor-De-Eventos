@@ -11,7 +11,9 @@ import { RegisterService } from '../../services/register.service';
 })
 export class RegisterComponent implements OnInit {
   private httpService = inject(RegisterService)
-  formUser!:FormGroup
+  formUser!:FormGroup;
+  successMessage: string = "";
+  errorMessage: string = "";
 
   ngOnInit(): void {
     this.formUser = new FormGroup({
@@ -21,14 +23,26 @@ export class RegisterComponent implements OnInit {
       correo_electronico: new FormControl("",[Validators.required,Validators.email]),
       password: new FormControl("",Validators.required),
       rol: new FormControl("",Validators.required)
-    })
+    });
   }
 
-  sendDataToService(){
-    console.log(this.formUser.value)
-    this.httpService.registerUser(this.formUser.value).subscribe( res => {
-      console.log(res,"http")
-    })
+  // Enviar datos al servicio y manejar las respuestas
+  sendDataToService() {
+    if (this.formUser.valid) {
+      this.httpService.registerUser(this.formUser.value).subscribe(
+        (res) => {
+          this.successMessage = 'Registro exitoso. Bienvenido/a!';
+          this.errorMessage = ''; // Limpiar mensaje de error en caso de éxito
+          this.formUser.reset();  // Limpiar el formulario
+        },
+        (error) => {
+          this.errorMessage = 'Error al registrar el usuario. Inténtalo nuevamente.';
+          this.successMessage = ''; // Limpiar mensaje de éxito en caso de error
+        }
+      );
+    } else {
+      this.errorMessage = 'Por favor, completa todos los campos correctamente.';
+      this.successMessage = ''; // Limpiar mensaje de éxito en caso de error
+    }
   }
-
 }

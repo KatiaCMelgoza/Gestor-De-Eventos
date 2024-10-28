@@ -1,5 +1,14 @@
-<form class="formulario" [formGroup]="formUser" (submit)="sendDataToService()">
+<form class="formulario" [formGroup]="formUser" (ngSubmit)="sendDataToService()">
     <h1>Registrate</h1>
+
+    <!-- Mensajes de éxito o error -->
+    <div *ngIf="successMessage" class="alert alert-success">
+        {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+    </div>
+    
     <div class="contenedor">
 
         <div class="input-contenedor">
@@ -42,3 +51,21 @@
 
     </div>
 </form>
+
+<!-- modal de exito -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="successModalLabel">Registro exitoso</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Tu registro se ha completado con éxito.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
