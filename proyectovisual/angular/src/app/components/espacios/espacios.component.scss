@@ -1,0 +1,35 @@
+/* Estilo general para los bloques */
+.card-block {
+    border-radius: 20px;
+    padding: 40px;
+    color: white;
+    font-family: Arial, sans-serif;
+    transition: transform 0.3s ease;
+}
+
+.card-block:hover {
+    transform: scale(1.05);
+}
+
+/* Bloques con diferentes colores */
+.red-block {
+    background-color: #a70232;
+}
+
+.green-block {
+    background-color: #6ec5a0;
+}
+
+.orange-block {
+    background-color: #f7a620;
+}
+
+/* Ajuste del texto y el icono */
+.card-block i {
+    color: white;
+}
+
+.card-block h3 {
+    font-weight: 700;
+    font-size: 20px;
+}
