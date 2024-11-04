@@ -1,0 +1,83 @@
+// Variables de color
+$primary-color: #0d6efd; // Ajusta a tu color primario de CUCEA
+$secondary-color: #6c757d;
+$background-color: #f8f9fa;
+$card-background: #ffffff;
+$button-color: #e66a3b; // Ajusta a un tono similar al botón en la imagen
+
+// Estilos generales
+body {
+  background-color: $background-color;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.login-card {
+  background-color: $card-background;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+
+  .profile-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    background-color: lighten($primary-color, 30%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 50%;
+      height: auto;
+    }
+  }
+
+  .form-label {
+    font-weight: 600;
+  }
+
+  .input-group-text {
+    background-color: $primary-color;
+    color: $card-background;
+    border: none;
+  }
+
+  input.form-control {
+    &:focus {
+      border-color: $primary-color;
+      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    }
+  }
+
+  .btn-primary {
+    background-color: $button-color;
+    border: none;
+
+    &:hover {
+      background-color: darken($button-color, 10%);
+    }
+  }
+
+  .register-link {
+    color: $primary-color;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .form-text {
+    color: $secondary-color;
+    font-size: 0.9rem;
+  }
+}

@@ -1,12 +1,29 @@
-<div class="mb-3 row">
-    <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
-    <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+<div class="login-container">
+  <div class="login-card shadow">
+    <h2 class="text-center mb-4">Mi Cuenta</h2>
+    <div class="profile-icon text-center">
+      <img src="path/to/profile-icon.png" alt="User Icon" />
+    </div>
+    <form>
+      <div class="mb-3">
+        <label for="loginEmail" class="form-label">Login</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-person"></i></span>
+          <input type="text" class="form-control" id="loginEmail" placeholder="Correo electrónico">
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="loginPassword" class="form-label">Password</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-lock"></i></span>
+          <input type="password" class="form-control" id="loginPassword" placeholder="Contraseña">
+        </div>
+        <small class="form-text text-end"><a href="#">¿Olvidaste tu contraseña?</a></small>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+    </form>
+    <div class="text-center mt-3">
+      <a routerLink="/registro" class="register-link">¿No tienes cuenta? Regístrate</a>
     </div>
   </div>
-  <div class="mb-3 row">
-    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-    <div class="col-sm-10">
-      <input type="password" class="form-control" id="inputPassword">
-    </div>
-  </div>
+</div>

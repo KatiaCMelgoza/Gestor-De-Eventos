@@ -1,10 +1,12 @@
 /* Estilo general para los bloques */
 .card-block {
+    height: 200px;
     border-radius: 20px;
     padding: 40px;
     color: white;
     font-family: Arial, sans-serif;
     transition: transform 0.3s ease;
+    text-align: center;
 }
 
 .card-block:hover {
