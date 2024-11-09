@@ -1,0 +1,27 @@
+body {
+    padding-top: 3rem;
+}
+
+.product-header {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.product {
+    max-width: 42em;
+}
+
+.carousel-inner img {
+    height: 400px;
+    object-fit: cover;
+}
+
+.product-list img {
+    width: 100%;
+    height: auto;
+}
+
+.footer {
+    padding: 2rem 0;
+    background-color: #f5f5f5;
+}

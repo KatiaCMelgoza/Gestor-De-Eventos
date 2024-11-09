@@ -15,23 +15,34 @@
 
 /* Bloques con diferentes colores */
 .red-block {
-    background-color: #a70232;
+    background-color: #aa0432;
+}
+
+.pink-block{
+    background-color:#ca093c;
+}
+.blue-block{
+    background-color: #082e56;
 }
 
 .green-block {
-    background-color: #6ec5a0;
+    background-color: #005f68;
 }
 
-.orange-block {
-    background-color: #f7a620;
+.yellow-block {
+    background-color: #fe9d19;
 }
+
+
 
 /* Ajuste del texto y el icono */
 .card-block i {
+    text-align: center;
     color: white;
 }
 
 .card-block h3 {
+    text-align: center;
     font-weight: 700;
     font-size: 20px;
 }

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Inscripción</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Formulario de Inscripción</h2>
+        <form>
+            <div class="form-group row">
+                <label for="nombre" class="col-sm-3 col-form-label">Nombre Completo <span class="text-danger">*</span></label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre Completo" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="codigo" class="col-sm-3 col-form-label">Código</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="codigo" name="codigo" placeholder="Código (opcional)">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="carrera" class="col-sm-3 col-form-label">Carrera <span class="text-danger">*</span></label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="carrera" name="carrera" placeholder="Carrera" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="semestre" class="col-sm-3 col-form-label">Semestre <span class="text-danger">*</span></label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="semestre" name="semestre" placeholder="Semestre" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="tipo" class="col-sm-3 col-form-label">Tipo <span class="text-danger">*</span></label>
+                <div class="col-sm-9">
+                    <select class="form-control" id="tipo" name="tipo" required>
+                        <option value="">Seleccionar</option>
+                        <option value="profesor">Profesor</option>
+                        <option value="estudiante">Estudiante</option>
+                        <option value="administrativo">Administrativo</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">¿Tiene alguna discapacidad? <span class="text-danger">*</span></label>
+                <div class="col-sm-9">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="discapacidad" id="discapacidadEspecifica" value="especifica" required>
+                        <label class="form-check-label" for="discapacidadEspecifica">Especifica</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row" id="detalleDiscapacidadGroup" style="display: none;">
+                <label for="discapacidadDetalle" class="col-sm-3 col-form-label">Especificar discapacidad</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="discapacidadDetalle" name="discapacidadDetalle" placeholder="Especificar discapacidad">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-12 text-center">
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Mostrar el campo de texto solo si se selecciona la opción "Especifica"
+        document.addEventListener('DOMContentLoaded', function() {
+            const especificaRadio = document.getElementById('discapacidadEspecifica');
+            const detalleInputGroup = document.getElementById('detalleDiscapacidadGroup');
+
+            especificaRadio.addEventListener('change', function() {
+                if (especificaRadio.checked) {
+                    detalleInputGroup.style.display = 'flex';
+                    document.getElementById('discapacidadDetalle').required = true;
+                } else {
+                    detalleInputGroup.style.display = 'none';
+                    document.getElementById('discapacidadDetalle').required = false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
