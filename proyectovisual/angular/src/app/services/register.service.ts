@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators'; // Importar tap desde rxjs/operators
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterService {
-  private pathUrl = 'http://localhost:3000/api'; // URL del backend
+  private pathUrl = 'http://localhost:3000/api'; // La URL de tu backend en Node.js
 
   constructor(private http: HttpClient) {}
 
@@ -15,28 +17,25 @@ export class RegisterService {
     return this.http.post(`${this.pathUrl}/register`, userData);
   }
 
-  // Método para iniciar sesión y obtener el token
+  // Método de login para autenticación
   doLogin(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.pathUrl}/auth/login`, { correo_electronico: email, password: password });
+    return this.http.post(`${this.pathUrl}/auth/login`, { correo_electronico: email, password })
+      .pipe(
+        tap((res: any) => {
+          localStorage.setItem("token", res.token);
+          localStorage.setItem("userName", res.name); // Guardar el nombre del usuario
+        })
+      );
   }
 
-  // Guardar el token en localStorage
-  setToken(token: string): void {
-    localStorage.setItem('token', token);
+  // Método para obtener el nombre del usuario
+  getUserName(): string | null {
+    return localStorage.getItem("userName");
   }
 
-  // Obtener el token desde localStorage
-  getToken(): string | null {
-    return localStorage.getItem('token');
-  }
-
-  // Verificar si el usuario está autenticado
-  isAuthenticated(): boolean {
-    return !!this.getToken(); // Devuelve true si hay un token en localStorage
-  }
-
-  // Eliminar el token (cerrar sesión)
-  logout(): void {
-    localStorage.removeItem('token');
+  // Método de cierre de sesión
+  logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userName");
   }
 }

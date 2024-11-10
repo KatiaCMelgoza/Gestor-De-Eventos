@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { RegisterService } from '../../services/register.service';
-
+import { FormsModule } from '@angular/forms'; // Importa FormsModule
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule], // Incluye FormsModule aquí
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
@@ -19,11 +19,13 @@ export class LoginComponent {
   errorMessage: string = '';
 
   login() {
-    // Llama al servicio de login con el email y la contraseña
     this.loginService.doLogin(this.email, this.password).subscribe(
       (res: any) => {
-        // Almacena el token en el localStorage
+        // Almacena el token y el nombre en el localStorage
         localStorage.setItem("token", res.token);
+        localStorage.setItem("userName", res.name); // Guardar el nombre del usuario
+
+        // Navega a la página principal o de inicio
         this.router.navigate(["/home"]);
       },
       (error) => {

@@ -1,29 +1,18 @@
- <div class="login-container">
-  <div class="login-card shadow">
-    <h2 class="text-center mb-4">Mi Cuenta</h2>
-    <div class="profile-icon text-center">
-      <img src="/proyectovisual/angular/src/assets/user.png" alt="User Icon" />
-    </div>
-    <form (ngSubmit)="login()">
-      <div class="mb-3">
-        <label for="loginEmail" class="form-label">Login</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-person"></i></span>
-          <input type="text" class="form-control" id="loginEmail" [(ngModel)]="form" [ngModelOptions]="{standalone: true}" placeholder="Correo electrónico">
-        </div>
-      </div>
-      <div class="mb-3">
-        <label for="loginPassword" class="form-label">Password</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-lock"></i></span>
-          <input type="password" class="form-control" id="loginPassword" placeholder="Contraseña">
-        </div>
-        <small class="form-text text-end"><a href="#">¿Olvidaste tu contraseña?</a></small>
-      </div>
-      <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
-    </form>
-    <div class="text-center mt-3">
-      <a routerLink="/registro" class="register-link">¿No tienes cuenta? Regístrate</a>
+<form (ngSubmit)="login()">
+  <div class="mb-3">
+    <label for="loginEmail" class="form-label">Correo Electrónico</label>
+    <div class="input-group">
+      <span class="input-group-text"><i class="bi bi-person"></i></span>
+      <input type="text" class="form-control" id="loginEmail" [(ngModel)]="email" name="email" placeholder="Correo electrónico" required>
     </div>
   </div>
-</div> 
+  <div class="mb-3">
+    <label for="loginPassword" class="form-label">Contraseña</label>
+    <div class="input-group">
+      <span class="input-group-text"><i class="bi bi-lock"></i></span>
+      <input type="password" class="form-control" id="loginPassword" [(ngModel)]="password" name="password" placeholder="Contraseña" required>
+    </div>
+    <small class="form-text text-end"><a href="#">¿Olvidaste tu contraseña?</a></small>
+  </div>
+  <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+</form>
