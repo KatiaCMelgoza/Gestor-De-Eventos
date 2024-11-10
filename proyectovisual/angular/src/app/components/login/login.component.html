@@ -1,15 +1,15 @@
-<div class="login-container">
+<!-- <div class="login-container">
   <div class="login-card shadow">
     <h2 class="text-center mb-4">Mi Cuenta</h2>
     <div class="profile-icon text-center">
       <img src="/proyectovisual/angular/src/assets/user.png" alt="User Icon" />
     </div>
-    <form>
+    <form (ngSubmit)="login()">
       <div class="mb-3">
         <label for="loginEmail" class="form-label">Login</label>
         <div class="input-group">
           <span class="input-group-text"><i class="bi bi-person"></i></span>
-          <input type="text" class="form-control" id="loginEmail" placeholder="Correo electrónico">
+          <input type="text" class="form-control" id="loginEmail" [(ngModel)]="form" [ngModelOptions]="{standalone: true}" placeholder="Correo electrónico">
         </div>
       </div>
       <div class="mb-3">
@@ -26,4 +26,4 @@
       <a routerLink="/registro" class="register-link">¿No tienes cuenta? Regístrate</a>
     </div>
   </div>
-</div>
+</div> -->

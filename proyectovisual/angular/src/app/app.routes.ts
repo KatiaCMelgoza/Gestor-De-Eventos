@@ -10,6 +10,7 @@ export const routes: Routes = [
     {path:"login", loadComponent:() => import("./components/login/login.component").then(m => m.LoginComponent)},
     {path:"solicitudes", loadComponent:() => import("./components/espacios/espacios.component").then(m => m.EspaciosComponent)},
     {path:"preguntas", loadComponent:() => import("./components/preguntas/preguntas.component").then(m => m.PreguntasComponent)},
+    {path:"form_registro", loadComponent:() => import("./components/form-registro/form-registro.component").then(m => m.FormRegistroComponent)},
     {path:"**", redirectTo:"inicio", pathMatch:"full"}
     
 ];
