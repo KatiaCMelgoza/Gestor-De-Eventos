@@ -42,16 +42,9 @@ import { FormRegistroComponent } from './components/form-registro/form-registro.
   standalone: true,
   imports: [
     RouterOutlet, 
-    RegisterComponent, 
     HeaderComponent, 
     FooterComponent, 
     SectionComponent,
-    LoginComponent,
-    PreguntasComponent, 
-    EspaciosComponent, 
-    EventosProximosComponent, 
-    EventosPasadosComponent, 
-    FormRegistroComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'] // Cambia styleUrl a styleUrls

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-eventos-pasados',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterModule],
   templateUrl: './eventos-pasados.component.html',
   styleUrl: './eventos-pasados.component.scss'
 })
