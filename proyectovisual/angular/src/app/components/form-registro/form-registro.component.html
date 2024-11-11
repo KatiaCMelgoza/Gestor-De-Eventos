@@ -9,35 +9,38 @@
 <body>
     <div class="container mt-5">
         <h2 class="text-center mb-4">Formulario de Inscripción</h2>
-        <form>
+        <div id="authMessage" class="alert alert-warning text-center" style="display: none;">
+            Debes iniciar sesión para poder inscribirte.
+        </div>
+        <form (ngSubmit)="registrarInscripcion()" id="inscripcionForm">
             <div class="form-group row">
-                <label for="nombre" class="col-sm-3 col-form-label">Nombre Completo <span class="text-danger">*</span></label>
+                <label for="nombre_completo" class="col-sm-3 col-form-label">Nombre Completo <span class="text-danger">*</span></label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre Completo" required>
+                    <input type="text" class="form-control" id="nombre_completo" [(ngModel)]="inscripcionData.nombre_completo" name="nombre_completo" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="codigo" class="col-sm-3 col-form-label">Código</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="codigo" name="codigo" placeholder="Código (opcional)">
+                    <input type="text" class="form-control" id="codigo" [(ngModel)]="inscripcionData.codigo" name="codigo">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="carrera" class="col-sm-3 col-form-label">Carrera <span class="text-danger">*</span></label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="carrera" name="carrera" placeholder="Carrera" required>
+                    <input type="text" class="form-control" id="carrera" [(ngModel)]="inscripcionData.carrera" name="carrera" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="semestre" class="col-sm-3 col-form-label">Semestre <span class="text-danger">*</span></label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="semestre" name="semestre" placeholder="Semestre" required>
+                    <input type="number" class="form-control" id="semestre" [(ngModel)]="inscripcionData.semestre" name="semestre" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="tipo" class="col-sm-3 col-form-label">Tipo <span class="text-danger">*</span></label>
                 <div class="col-sm-9">
-                    <select class="form-control" id="tipo" name="tipo" required>
+                    <select class="form-control" id="tipo" [(ngModel)]="inscripcionData.tipo" name="tipo" required>
                         <option value="">Seleccionar</option>
                         <option value="profesor">Profesor</option>
                         <option value="estudiante">Estudiante</option>
@@ -50,15 +53,19 @@
                 <label class="col-sm-3 col-form-label">¿Tiene alguna discapacidad? <span class="text-danger">*</span></label>
                 <div class="col-sm-9">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="discapacidad" id="discapacidadEspecifica" value="especifica" required>
-                        <label class="form-check-label" for="discapacidadEspecifica">Especifica</label>
+                        <input class="form-check-input" type="radio" [(ngModel)]="inscripcionData.discapacidad" name="discapacidad" [value]="1" required>
+                        <label class="form-check-label">Especifica</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" [(ngModel)]="inscripcionData.discapacidad" name="discapacidad" [value]="0" required>
+                        <label class="form-check-label">No</label>
                     </div>
                 </div>
             </div>
-            <div class="form-group row" id="detalleDiscapacidadGroup" style="display: none;">
-                <label for="discapacidadDetalle" class="col-sm-3 col-form-label">Especificar discapacidad</label>
+            <div *ngIf="inscripcionData.discapacidad === 1" class="form-group row">
+                <label for="especifica_discapacidad" class="col-sm-3 col-form-label">Especificar discapacidad</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="discapacidadDetalle" name="discapacidadDetalle" placeholder="Especificar discapacidad">
+                    <input type="text" class="form-control" id="especifica_discapacidad" [(ngModel)]="inscripcionData.especifica_discapacidad" name="especifica_discapacidad">
                 </div>
             </div>
             <div class="form-group row">
@@ -66,29 +73,13 @@
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </div>
             </div>
+            <div *ngIf="mensajeExito" class="alert alert-success mt-3">{{ mensajeExito }}</div>
+            <div *ngIf="mensajeError" class="alert alert-danger mt-3">{{ mensajeError }}</div>
         </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        // Mostrar el campo de texto solo si se selecciona la opción "Especifica"
-        document.addEventListener('DOMContentLoaded', function() {
-            const especificaRadio = document.getElementById('discapacidadEspecifica');
-            const detalleInputGroup = document.getElementById('detalleDiscapacidadGroup');
-
-            especificaRadio.addEventListener('change', function() {
-                if (especificaRadio.checked) {
-                    detalleInputGroup.style.display = 'flex';
-                    document.getElementById('discapacidadDetalle').required = true;
-                } else {
-                    detalleInputGroup.style.display = 'none';
-                    document.getElementById('discapacidadDetalle').required = false;
-                }
-            });
-        });
-    </script>
 </body>
 </html>
-
