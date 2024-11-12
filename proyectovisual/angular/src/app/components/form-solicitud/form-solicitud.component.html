@@ -1,1 +1,113 @@
-<p>form-solicitud works!</p>
+<form (ngSubmit)="registrarEvento()" enctype="multipart/form-data" class="container mt-4">
+    <!-- 1. Información del Solicitante -->
+    <h3 class="mb-3">Información del Solicitante</h3>
+    
+    <div class="mb-3">
+      <label for="nombre_completo" class="form-label">Nombre Completo:</label>
+      <input type="text" class="form-control" id="nombre_completo" [(ngModel)]="eventoData.nombre_completo" name="nombre_completo" required>
+    </div>
+    
+    <div class="mb-3">
+      <label for="correo_electronico" class="form-label">Correo Electrónico:</label>
+      <input type="email" class="form-control" id="correo_electronico" [(ngModel)]="eventoData.correo_electronico" name="correo_electronico" required>
+    </div>
+    
+    <div class="mb-3">
+      <label for="telefono" class="form-label">Número de Teléfono:</label>
+      <input type="tel" class="form-control" id="telefono" [(ngModel)]="eventoData.telefono" name="telefono" required>
+    </div>
+    
+    <div class="mb-3">
+      <label for="id_usuario" class="form-label">ID de Estudiante/Profesor/Administrativo:</label>
+      <input type="text" class="form-control" id="id_usuario" [(ngModel)]="eventoData.id_usuario" name="id_usuario">
+    </div>
+    
+    <div class="mb-3">
+      <label for="departamento" class="form-label">Departamento o Área Académica:</label>
+      <input type="text" class="form-control" id="departamento" [(ngModel)]="eventoData.departamento" name="departamento">
+    </div>
+  
+    <!-- 2. Información del Evento -->
+    <h3 class="mt-4 mb-3">Información del Evento</h3>
+    
+    <div class="mb-3">
+      <label for="nombre_evento" class="form-label">Nombre del Evento:</label>
+      <input type="text" class="form-control" id="nombre_evento" [(ngModel)]="eventoData.nombre_evento" name="nombre_evento" required>
+    </div>
+    
+    <div class="mb-3">
+      <label for="descripcion_evento" class="form-label">Descripción del Evento:</label>
+      <textarea class="form-control" id="descripcion_evento" [(ngModel)]="eventoData.descripcion_evento" name="descripcion_evento" required></textarea>
+    </div>
+    
+    <div class="mb-3">
+      <label for="tipo_evento" class="form-label">Tipo de Evento:</label>
+      <select class="form-select" id="tipo_evento" [(ngModel)]="eventoData.tipo_evento" name="tipo_evento" required>
+        <option value="conferencia">Conferencia</option>
+        <option value="taller">Taller</option>
+        <option value="seminario">Seminario</option>
+        <option value="mesa_redonda">Mesa Redonda</option>
+        <option value="reunion">Reunión</option>
+      </select>
+    </div>
+    
+    <div class="mb-3">
+      <label for="numero_asistentes" class="form-label">Número Estimado de Asistentes:</label>
+      <input type="number" class="form-control" id="numero_asistentes" [(ngModel)]="eventoData.numero_asistentes" name="numero_asistentes" required>
+    </div>
+  
+    <div class="mb-3">
+      <label for="tipo_audiencia" class="form-label">Tipo de Audiencia:</label>
+      <select class="form-select" id="tipo_audiencia" [(ngModel)]="eventoData.tipo_audiencia" name="tipo_audiencia" required>
+        <option value="interna">Interna</option>
+        <option value="publica">Abierta al Público General</option>
+        <option value="mixta">Mixta</option>
+      </select>
+    </div>
+  
+    <!-- 3. Espacio Solicitado -->
+    <h3 class="mt-4 mb-3">Espacio Solicitado</h3>
+    
+    <div class="mb-3">
+      <label for="tipo_espacio" class="form-label">Tipo de Espacio:</label>
+      <select class="form-select" id="tipo_espacio" [(ngModel)]="eventoData.tipo_espacio" name="tipo_espacio" required>
+        <option value="auditorio">Auditorio</option>
+        <option value="aula">Aula</option>
+        <option value="sala_conferencias">Sala de Conferencias</option>
+        <option value="salon_multifuncional">Salón Multifuncional</option>
+        <option value="areas_abiertas">Áreas Abiertas</option>
+      </select>
+    </div>
+  
+    <div class="mb-3">
+      <label for="ubicacion_espacio" class="form-label">Nombre o Ubicación del Espacio Preferido:</label>
+      <input type="text" class="form-control" id="ubicacion_espacio" [(ngModel)]="eventoData.ubicacion_preferida" name="ubicacion_preferida">
+    </div>
+  
+    <div class="mb-3">
+      <label for="fecha_evento" class="form-label">Fecha del Evento:</label>
+      <input type="date" class="form-control" id="fecha_evento" [(ngModel)]="eventoData.fecha_evento" name="fecha_inicio" required>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="hora_inicio" class="form-label">Hora de Inicio:</label>
+        <input type="time" class="form-control" id="hora_inicio" [(ngModel)]="eventoData.hora_inicio" name="hora_inicio" required>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="hora_fin" class="form-label">Hora de Fin:</label>
+        <input type="time" class="form-control" id="hora_fin" [(ngModel)]="eventoData.hora_fin" name="hora_fin" required>
+      </div>
+    </div>
+  
+    <!-- 4. Documentación Adjunta -->
+    <h3 class="mt-4 mb-3">Documentación Adjunta</h3>
+    
+    <div class="mb-3">
+      <label for="imagen_evento" class="form-label">Adjuntar Imagen del Evento:</label>
+      <input type="file" class="form-control" id="imagen_evento" (change)="onFileChange($event)" name="imagen_evento">
+    </div>
+    
+    <!-- 5. Enviar Formulario -->
+    <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+  </form>
