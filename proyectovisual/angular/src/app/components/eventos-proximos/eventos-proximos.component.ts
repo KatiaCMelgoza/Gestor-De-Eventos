@@ -1,3 +1,5 @@
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
@@ -6,13 +8,30 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-eventos-proximos',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './eventos-proximos.component.html',
   styleUrl: './eventos-proximos.component.scss'
 })
 export class EventosProximosComponent {
-  constructor(private router: Router) {}
+  eventos: any[] = [];
+  constructor(private http: HttpClient, private router: Router) {}
 
+  ngOnInit(): void{
+    this.obtenerEventosAprobados();
+  }
+
+  obtenerEventosAprobados(): void {
+    this.http.get('http://localhost:3000/api/eventos/aprobados').subscribe(
+      (data: any) => {
+        this.eventos = data; // Guardar los eventos obtenidos
+      },
+      (error) => {
+        console.error('Error al obtener eventos aprobados:', error);
+      }
+    );
+  }
+
+  //revisar que el usuario este autentificado
   checkAuthBeforeRegister() {
     const token = localStorage.getItem('token');
     
