@@ -1,55 +1,55 @@
-<div class="container my-5">
+<!-- <div class="container my-5">
     <div class="row text-center">
-        <!-- Bloque 1 -->
+        Bloque 1
         <div class="col-md-4 mb-4">
             <div class="card-block red-block">
                 <i class="fas fa-calendar-alt fa-3x mb-3"></i>
                 <h3>AUDITORIO CENTRAL</h3>
             </div>
         </div>
-        <!-- Bloque 2 -->
+        Bloque 2
         <div class="col-md-4 mb-4">
             <div class="card-block pink-block">
                 <i class="fas fa-check-square fa-3x mb-3"></i>
                 <h3>AUDITORIO CERI</h3>
             </div>
         </div>
-        <!-- Bloque 3 -->
+        Bloque 3
         <div class="col-md-4 mb-4">
             <div class="card-block blue-block">
                 <i class="fas fa-user-tie fa-3x mb-3"></i>
                 <h3>SALA DE GOBIERNO</h3>
             </div>
         </div>
-        <!-- Bloque 4 -->
+        Bloque 4
         <div class="col-md-4 mb-4">
             <div class="card-block green-block">
                 <i class="fas fa-user-tie fa-3x mb-3"></i>
                 <h3>SALA DE USOS MÚLTIPLES MÓDULO O</h3>
             </div>
         </div>
-        <!-- Bloque 5 -->
+        Bloque 5
         <div class="col-md-4 mb-4">
             <div class="card-block yellow-block">
                 <i class="fas fa-user-tie fa-3x mb-3"></i>
                 <h3>SALA DE LABORATORIO DE INNOVACIÓN</h3>
             </div>
         </div>
-        <!-- Bloque 6 -->
+        Bloque 6
         <div class="col-md-4 mb-4">
             <div class="card-block red-block">
                 <i class="fas fa-user-tie fa-3x mb-3"></i>
                 <h3>AULAS AMPLIAS 1-5</h3>
             </div>
         </div>
-        <!-- Bloque 7 -->
+        Bloque 7
         <div class="col-md-4 mb-4">
             <div class="card-block pink-block">
                 <i class="fas fa-user-tie fa-3x mb-3"></i>
                 <h3>EXPLANADA DEL AUDITORIO CENTRAL</h3>
             </div>
         </div>
-        <!-- Bloque 8 -->
+        Bloque 8
         <div class="col-md-4 mb-4">
             <div class="card-block blue-block">
                 <i class="fas fa-user-tie fa-3x mb-3"></i>
@@ -64,4 +64,27 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
+
+
+<div class="container my-5">
+    <div class="row text-center">
+      <!-- Bloques generados dinámicamente -->
+      <div *ngFor="let espacio of espacios; let i = index" class="col-md-4 mb-4">
+        <div [ngClass]="getCardClass(i)">
+          <i class="fas fa-building fa-3x mb-3"></i>
+          <h3>{{ espacio.nombre }}</h3>
+          <p class="mt-2">Capacidad: {{ espacio.capacidad }}</p>
+        </div>
+      </div>
+      <!-- Bloque para registrar un nuevo evento -->
+      <div class="col-md-4 mb-4">
+        <div class="card-block orange-block">
+          <i class="fas fa-plus-circle fa-3x mb-3"></i>
+          <h3>Registrar Nuevo Evento</h3>
+          <button class="btn btn-primary mt-3" (click)="redirectToEventForm()">Ir al Formulario</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,31 @@
+<div class="container my-5">
+  <h2 class="text-center">Panel de Administración</h2>
+
+  <!-- Formulario para agregar espacio -->
+  <div class="my-4">
+    <h3>Agregar Espacio</h3>
+    <form class="row g-3" (ngSubmit)="agregarEspacio()">
+      <div class="col-md-4">
+        <label for="tipo_espacio" class="form-label">Tipo de Espacio</label>
+        <select class="form-select" id="tipo_espacio" [(ngModel)]="nuevoEspacio.tipo_espacio" name="tipo_espacio" required>
+          <option value="auditorio">Auditorio</option>
+          <option value="aula">Aula</option>
+          <option value="sala de conferencias">Sala de Conferencias</option>
+          <option value="salon multifuncional">Salón Multifuncional</option>
+          <option value="area abierta">Área Abierta</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" [(ngModel)]="nuevoEspacio.nombre" name="nombre" required>
+      </div>
+      <div class="col-md-4">
+        <label for="capacidad" class="form-label">Capacidad</label>
+        <input type="number" class="form-control" id="capacidad" [(ngModel)]="nuevoEspacio.capacidad" name="capacidad" required>
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Agregar Espacio</button>
+      </div>
+    </form>
+  </div>
+</div>
