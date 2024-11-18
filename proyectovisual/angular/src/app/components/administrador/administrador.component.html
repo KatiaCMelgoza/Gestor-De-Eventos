@@ -1,6 +1,42 @@
 <div class="container my-5">
   <h2 class="text-center">Panel de Administración</h2>
 
+  <!-- Gestión de Eventos -->
+  <div class="my-4">
+    <h3>Gestión de Eventos Pendientes</h3>
+
+    <!-- Lista de eventos pendientes -->
+    <div *ngFor="let evento of eventos" class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ evento.nombre }}</h5>
+        <p class="card-text">
+          <strong>Descripción:</strong> {{ evento.descripcion }}<br />
+          <strong>Tipo:</strong> {{ evento.tipo }}<br />
+          <strong>Fecha:</strong> {{ evento.fecha }}<br />
+          <strong>Hora:</strong> {{ evento.hora_inicio }} - {{ evento.hora_fin }}
+        </p>
+        <!-- Botones para aprobar o rechazar -->
+        <button
+          class="btn btn-success me-2"
+          (click)="actualizarEstado(evento.evento_id, 'aprobado')"
+        >
+          Aprobar
+        </button>
+        <button
+          class="btn btn-danger"
+          (click)="actualizarEstado(evento.evento_id, 'rechazado')"
+        >
+          Rechazar
+        </button>
+      </div>
+    </div>
+
+    <!-- Mensaje si no hay eventos pendientes -->
+    <p *ngIf="eventos.length === 0" class="text-center mt-4">
+      No hay eventos pendientes por revisar.
+    </p>
+  </div>
+
   <!-- Formulario para agregar espacio -->
   <div class="my-4">
     <h3>Agregar Espacio</h3>

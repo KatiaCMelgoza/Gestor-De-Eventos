@@ -24,20 +24,32 @@ export class AdministradorComponent implements OnInit{
   constructor(private http: HttpClient){}
 
   ngOnInit(): void {
-    this.obtenerEventos();
+    this.obtenerEventosPendientes();
   }
 
-  obtenerEventos(){
-    this.http.get('http://localhost:3000/api/administrador/eventos').subscribe((data: any) => {
-      this.eventos = data;
-    });
+  obtenerEventosPendientes(){
+    this.http.get('http://localhost:3000/api/administrador/eventos').subscribe(
+      (data: any) => {
+      this.eventos = data.filter((evento: any) => evento.estado === 'pendiente');
+    },
+    (error) => {
+      console.error('Errorl obtener eventos:', error);
+     }
+    );
   }
 
-  actualizarEstado(eventoId: number, estado: string) {
-    this.http.put(`http://localhost:3000/api/administrador/eventos/${eventoId}`, { estado }).subscribe(() => {
-      alert('Estado actualizado');
-      this.obtenerEventos();
-    });
+  actualizarEstado(eventoId: number, estado: string): void {
+    this.http
+      .put(`http://localhost:3000/api/administrador/eventos/${eventoId}`, { estado })
+      .subscribe(
+        () => {
+          alert(`El evento fue ${estado} exitosamente.`);
+          this.obtenerEventosPendientes(); // Recargar eventos pendientes
+        },
+        (error) => {
+          console.error('Error al actualizar el estado del evento:', error);
+        }
+      );
   }
 
   // Agregar un nuevo espacio
