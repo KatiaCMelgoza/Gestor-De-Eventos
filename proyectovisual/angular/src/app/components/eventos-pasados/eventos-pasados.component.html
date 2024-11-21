@@ -1,33 +1,21 @@
-<div class="imgp1">
-    <a href=""target="_blank"><img src="../../../assets/imgp1.jpg" alt="evento" class="imgp1"></a>
-</div>
-<div class=".text1">
-    <p>Fecha: Viernes 15 de marzo de 2024</p>
-    <p>Webinar: Aprendizajes para toda la vida</p>
-    <p>Hora: 10:00 hrs</p>
-    <p>Ponente: Dra Luisa F. Echeverría-King</p>
-    <p>Espacio: Virtual</p>
-
-<div class="imgp2">
-        <a href=""target="_blank"><img src="../../../assets/imgp2.jpeg" alt="evento" class="imgp2"></a>
-</div>
-<div class=".text1">
-    <p>Fecha: Viernes 16 de Enero de 2024</p>
-    <p>Conferencia: Diversidad Estudiantil</p>
-    <p>Hora: 10:00 hrs</p>
-    <p>Lugar: Sala de laboratorio de Innovación Torre Smart Piso 2</p>
-    <p>Ponente: Dra Ericka Adeiana Loyo Beristáin</p>
-    <p>Espacio: Presencial</p> 
-
-    <div class="imgp3">
-        <a href=""target="_blank"><img src="../../../assets/imgp3.jpg" alt="evento" class="imgp3"></a>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Eventos Pasados</h2>
+    <div class="row">
+      <div *ngFor="let evento of eventosPasados" class="col-md-4 mb-4">
+        <div class="card">
+          <a href="" target="_blank">
+            <img [src]="evento.imagen || '../../../assets/default.jpg'" alt="evento" class="card-img-top">
+          </a>
+          <div class="card-body">
+            <h5 class="card-title">{{ evento.nombre }}</h5>
+            <p class="card-text"><strong>Fecha:</strong> {{ evento.fecha | date }}</p>
+            <p class="card-text"><strong>Hora:</strong> {{ evento.hora_inicio }}</p>
+            <p *ngIf="evento.lugar" class="card-text"><strong>Lugar:</strong> {{ evento.lugar }}</p>
+            <p class="card-text"><strong>Ponente:</strong> {{ evento.descripcion }}</p>
+            <p class="card-text"><strong>Espacio:</strong> {{ evento.espacio }}</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class=".text1">
-        <p>Fecha: Viernes 12 de Enero de 2024</p>
-        <p>Conferencia: Experiencias docentes con la discapacidad</p>
-        <p>Hora: 12:00 hrs</p>
-        <p>Lugar: Sala de laboratorio de Innovación Torre Smart Piso 2</p>
-        <p>Ponente: Mtra Karla Mariana Escobar Magallanes</p>
-        <p>Espacio: Presencial</p> 
-        
-    
+  </div>
+  

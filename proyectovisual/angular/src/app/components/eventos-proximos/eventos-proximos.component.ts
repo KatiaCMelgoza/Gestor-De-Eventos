@@ -29,15 +29,16 @@ export class EventosProximosComponent {
         console.error('Error al obtener eventos aprobados:', error);
       }
     );
+    console.log(this.eventos);
   }
 
   //revisar que el usuario este autentificado
-  checkAuthBeforeRegister() {
+  checkAuthBeforeRegister(evento_id: any) {
     const token = localStorage.getItem('token');
-    
+    console.log(evento_id);
     if (token) {
       // Usuario autenticado, redirigir al formulario de inscripción
-      this.router.navigate(['/form_registro']);
+      this.router.navigate(['/form_registro', evento_id]);
     } else {
       // Usuario no autenticado, redirigir a la página de inicio de sesión con el parámetro 'redirect'
       alert('Debes iniciar sesión');

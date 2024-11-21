@@ -11,7 +11,7 @@
           <p class="card-text"><strong>Hora:</strong> {{ evento.hora_inicio }} - {{ evento.hora_fin }}</p>
           <p class="card-text"><strong>Lugar:</strong> {{ evento.espacio }}</p>
           <p class="card-text"><strong>Descripción:</strong> {{ evento.descripcion }}</p>
-          <a class="btn btn-primary" (click)="checkAuthBeforeRegister()">Registrarse</a>
+          <a class="btn btn-primary" (click)="checkAuthBeforeRegister(evento.evento_id)">Registrarse</a>
         </div>
       </div>
     </div>

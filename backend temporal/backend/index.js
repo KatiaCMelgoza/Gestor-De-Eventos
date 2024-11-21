@@ -5,6 +5,7 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken'); // Importación de jsonwebtoken
 const app = express();
+require('./cronJobs');
 
 const PORT = process.env.PORT || 3000; // Define el puerto con variable de entorno o 3000
 const SECRET_KEY = process.env.SECRET_KEY || 'tu_clave_secreta'; // Define SECRET_KEY desde .env o por defecto
@@ -74,20 +75,19 @@ app.post('/api/auth/login', (req, res) => {
       console.log(user); // Verifica aquí que el campo `nombre` exista y tenga un valor
 
       const isPasswordValid = await bcrypt.compare(password, user.password);
-
+      console.log(user.usuario_id)
       if (isPasswordValid) {
         const token = jwt.sign(
-          { userId: user.id_usuario, correo_electronico: user.correo_electronico },
+          { userId: user.usuario_id, correo_electronico: user.correo_electronico },
           SECRET_KEY,
           { expiresIn: '1h' }
         );
-
         // Enviar el nombre en la respuesta
         return res.json({
           message: 'Inicio de sesión exitoso',
           token,
           name: user.nombre, // nombre de base de datos
-          userId: user.id_usuario  // ID único del usuario en la base de datos
+          userId: user.usuario_id  // ID único del usuario en la base de datos
 
         });
       } else {
@@ -100,7 +100,6 @@ app.post('/api/auth/login', (req, res) => {
 });
 
 // Endpoint para registrar un evento:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-// Endpoint para registrar un evento
 app.post('/api/eventos', (req, res) => {
   const {
     nombre,
@@ -146,6 +145,39 @@ app.post('/api/eventos', (req, res) => {
   });
 });
 
+// Endpoint para obtener eventos pasados::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+// Obtener eventos pasados
+app.get('/api/eventos/pasados', (req, res) => {
+  const query = `
+    SELECT * FROM Eventos
+    WHERE estado = 'pasado';`;
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error('Error al obtener eventos pasados:', err);
+      return res.status(500).json({ error: 'Error al obtener eventos pasados.' });
+    }
+
+    res.json(results);
+  });
+});
+
+// Obtener eventos pasados
+app.get('/api/eventos/pasados', (req, res) => {
+  const query = `
+    SELECT * FROM Eventos
+    WHERE estado = 'pasado';`;
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error('Error al obtener eventos pasados:', err);
+      return res.status(500).json({ error: 'Error al obtener eventos pasados.' });
+    }
+
+    res.json(results);
+  });
+});
+
 //endpoint para mostrar eventos aporbados unicamente en la pagina proximos eventos
 app.get('/api/eventos/aprobados', (req, res) => {
   const query = 'SELECT * FROM Eventos WHERE estado = "aprobado"';
@@ -160,27 +192,96 @@ app.get('/api/eventos/aprobados', (req, res) => {
   });
 });
 
+// Endpoint para mostrar eventos aprobados y futuros en la página de Próximos Eventos
+app.get('/api/eventos/pasados', (req, res) => {
+  const query = 'SELECT * FROM Eventos WHERE estado = "pasado"';
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error('Error al obtener eventos pasados:', err);
+      return res.status(500).json({ error: 'Error al obtener eventos pasados.' });
+    }
+
+    res.json(results);
+  });
+});
+
 
 //endpoint para que un usuario se inscriba a un evento::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // Endpoint para registrar solicitantes
+// app.post('/api/registro-solicitantes', (req, res) => {
+//   const {
+//     nombre_completo,
+//     correo,
+//     telefono,
+//     id_universitario,
+//     departamento,
+//     evento_id,
+//     usuario_id
+//   } = req.body;
+
+//   if (!nombre_completo || !correo) {
+//     return res.status(400).json({ error: 'Los campos nombre_completo y correo son obligatorios.' });
+//   }
+
+//   const query = `
+//     INSERT INTO Registro_Solicitantes (nombre_completo, correo, telefono, id_universitario, departamento)
+//     VALUES (?, ?, ?, ?, ?)`;
+
+//   const values = [
+//     nombre_completo,
+//     correo,
+//     telefono || null, // Permitir valores nulos para campos opcionales
+//     id_universitario || null,
+//     departamento || null
+//   ];
+
+//   connection.query(query, values, (err, result) => {
+//     if (err) {
+//       console.error('Error al registrar solicitante:', err);
+//       return res.status(500).json({ error: 'Error al registrar al solicitante.' });
+//     }
+
+//     res.status(201).json({ message: 'Solicitante registrado exitosamente.', solicitanteId: result.insertId });
+//   });
+//   const query2 = 
+//   'INSERT INTO Notificaciones (evento_id, usuario_id) VALUES (?, ?)';
+
+//   const values2 =[
+//     evento_id,
+//     usuario_id
+//   ];
+//   console.log(values2);
+//   connection.query(query2, values2, (err, result) => {
+//     if (err) {
+//       console.error('Error al registrar notificacion:', err);
+//       return res.status(500).json({ error: 'Error al registrar notificacion.' });
+//     }
+
+//     res.status(201).json({ message: 'notficacion registrada con exito', solicitanteId: result.insertId });
+//   });
+// });
+
 app.post('/api/registro-solicitantes', (req, res) => {
   const {
     nombre_completo,
     correo,
     telefono,
     id_universitario,
-    departamento
+    departamento,
+    evento_id,
+    usuario_id
   } = req.body;
 
   if (!nombre_completo || !correo) {
     return res.status(400).json({ error: 'Los campos nombre_completo y correo son obligatorios.' });
   }
 
-  const query = `
+  const query1 = `
     INSERT INTO Registro_Solicitantes (nombre_completo, correo, telefono, id_universitario, departamento)
     VALUES (?, ?, ?, ?, ?)`;
 
-  const values = [
+  const values1 = [
     nombre_completo,
     correo,
     telefono || null, // Permitir valores nulos para campos opcionales
@@ -188,17 +289,33 @@ app.post('/api/registro-solicitantes', (req, res) => {
     departamento || null
   ];
 
-  connection.query(query, values, (err, result) => {
+  connection.query(query1, values1, (err, result1) => {
     if (err) {
       console.error('Error al registrar solicitante:', err);
       return res.status(500).json({ error: 'Error al registrar al solicitante.' });
     }
 
-    res.status(201).json({ message: 'Solicitante registrado exitosamente.', solicitanteId: result.insertId });
+    const query2 = `
+      INSERT INTO Notificaciones (evento_id, usuario_id)
+      VALUES (?, ?)`;
+
+    const values2 = [evento_id, usuario_id];
+
+    connection.query(query2, values2, (err, result2) => {
+      if (err) {
+        console.error('Error al registrar notificación:', err);
+        return res.status(500).json({ error: 'Error al registrar notificación.' });
+      }
+
+      // Enviar una única respuesta al cliente después de ambas operaciones
+      res.status(201).json({
+        message: 'Solicitante y notificación registrados exitosamente.',
+        solicitanteId: result1.insertId,
+        notificacionId: result2.insertId
+      });
+    });
   });
 });
-
-
 
 
 // Middleware para verificar el token
@@ -212,6 +329,7 @@ function authenticateToken(req, res, next) {
     next();
   });
 }
+
 
 //::::::::::::::::::::::::::::::::::::::::::::::::Administrador::::::::::::::::::::::::::::::::::::::::::::::.
 //endpoint para las consultas del administrador
