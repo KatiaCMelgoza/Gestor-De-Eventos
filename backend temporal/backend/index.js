@@ -8,6 +8,7 @@ const QRCode = require('qrcode'); // Para generar códigos QR
 const nodemailer = require('nodemailer'); // Para enviar correos
 const qrRoutes = require('./qrRoutes'); // Importa las rutas de QR
 const app = express();
+require('./cronJobs'); // Importa y ejecuta el archivo de cron jobs
 
 
 const PORT = process.env.PORT || 3000; // Define el puerto con variable de entorno o 3000
@@ -62,7 +63,46 @@ app.post('/api/register', async (req, res) => {
   });
 });
 
-// Endpoint para iniciar sesión::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+// // Endpoint para iniciar sesión::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+// app.post('/api/auth/login', (req, res) => {
+//   const { correo_electronico, password } = req.body;
+
+//   const query = 'SELECT * FROM usuarios WHERE correo_electronico = ?';
+//   connection.query(query, [correo_electronico], async (err, results) => {
+//     if (err) {
+//       console.error('Error al buscar el usuario:', err);
+//       return res.status(500).json({ error: 'Error al buscar el usuario en la base de datos' });
+//     }
+
+//     if (results.length > 0) {
+//       const user = results[0];
+//       console.log(user); // Verifica aquí que el campo `nombre` exista y tenga un valor
+
+//       const isPasswordValid = await bcrypt.compare(password, user.password);
+//       console.log(user.usuario_id)
+//       if (isPasswordValid) {
+//         const token = jwt.sign(
+//           { userId: user.usuario_id, correo_electronico: user.correo_electronico },
+//           SECRET_KEY,
+//           { expiresIn: '1h' }
+//         );
+//         // Enviar el nombre en la respuesta
+//         return res.json({
+//           message: 'Inicio de sesión exitoso',
+//           token,
+//           name: user.nombre, // nombre de base de datos
+//           userId: user.usuario_id  // ID único del usuario en la base de datos
+
+//         });
+//       } else {
+//         return res.status(401).json({ error: 'Contraseña incorrecta' });
+//       }
+//     } else {
+//       return res.status(404).json({ error: 'Usuario no encontrado' });
+//     }
+//   });
+// });
+
 app.post('/api/auth/login', (req, res) => {
   const { correo_electronico, password } = req.body;
 
@@ -75,23 +115,21 @@ app.post('/api/auth/login', (req, res) => {
 
     if (results.length > 0) {
       const user = results[0];
-      console.log(user); // Verifica aquí que el campo `nombre` exista y tenga un valor
-
       const isPasswordValid = await bcrypt.compare(password, user.password);
-      console.log(user.usuario_id)
+
       if (isPasswordValid) {
         const token = jwt.sign(
           { userId: user.usuario_id, correo_electronico: user.correo_electronico },
           SECRET_KEY,
           { expiresIn: '1h' }
         );
-        // Enviar el nombre en la respuesta
+
         return res.json({
           message: 'Inicio de sesión exitoso',
           token,
-          name: user.nombre, // nombre de base de datos
-          userId: user.usuario_id  // ID único del usuario en la base de datos
-
+          name: user.nombre,
+          userId: user.usuario_id,
+          rol: user.rol // Asegúrate de que `rol` esté definido en la base de datos
         });
       } else {
         return res.status(401).json({ error: 'Contraseña incorrecta' });
@@ -101,6 +139,28 @@ app.post('/api/auth/login', (req, res) => {
     }
   });
 });
+
+// // Endpoint para cerrar sesión
+// router.post('/api/auth/logout', (req, res) => {
+//   const token = req.headers.authorization?.split(' ')[1]; // Obtener el token del encabezado de autorización
+
+//   if (!token) {
+//     return res.status(400).json({ error: 'Token no proporcionado.' });
+//   }
+
+//   try {
+//     // Verificar el token antes de invalidarlo
+//     jwt.verify(token, SECRET_KEY);
+
+//     // Aquí no se puede "invalidar" directamente el token, pero puedes configurarlo para que el cliente lo elimine
+//     return res.status(200).json({ message: 'Sesión cerrada exitosamente. Por favor, elimina el token del cliente.' });
+//   } catch (err) {
+//     console.error('Error al cerrar sesión:', err);
+//     return res.status(401).json({ error: 'Token inválido o expirado.' });
+//   }
+// });
+
+// module.exports = router;
 
 // Endpoint para registrar un evento:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 app.post('/api/eventos', (req, res) => {

@@ -32,12 +32,14 @@ export class LoginComponent {
         localStorage.setItem("userName", res.name);
         localStorage.setItem("userId", res.userId.toString()); // Asegurarse de almacenar como string
         localStorage.setItem("email", this.email); // Almacenar el correo electrónico
+        localStorage.setItem('userRole', res.rol); // Guardar el rol del usuario
 
         console.log("Datos almacenados en localStorage:", {
           token: res.token,
           userName: res.name,
           userId: res.userId,
-          email: this.email
+          email: this.email,
+          userRol: res.rol
         }); // Para depuración
   
         // Verificar el valor de 'redirect'
