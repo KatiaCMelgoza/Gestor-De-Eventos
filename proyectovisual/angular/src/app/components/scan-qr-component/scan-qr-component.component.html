@@ -1,0 +1,9 @@
+<div class="scanner-container">
+    <h1>Escanea tu código QR</h1>
+    <zxing-scanner
+      [start]="true"
+      (scanSuccess)="onScanSuccess($event)">
+    </zxing-scanner>
+    <p *ngIf="message">{{ message }}</p>
+  </div>
+  

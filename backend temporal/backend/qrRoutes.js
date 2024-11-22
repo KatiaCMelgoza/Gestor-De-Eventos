@@ -47,7 +47,7 @@ router.post('/registrar', async (req, res) => {
 
     // Configurar y enviar el correo con Resend
     const emailResponse = await resend.emails.send({
-      from: 'alexx111.al@hotmail.es', // Cambia esto por el remitente configurado en Resend
+      from: 'e_mannage <onboarding@resend.dev>', 
       to: correo,
       subject: `Código QR para el evento #${evento_id}`,
       html: `<h1>¡Gracias por registrarte, ${nombre}!</h1>
@@ -92,5 +92,36 @@ router.post('/validar', (req, res) => {
     res.status(401).json({ error: 'QR inválido o expirado' });
   }
 });
+
+//Asistencia's endpoint:::::::::::::::::::::::::::::::::::::::::::::::::::
+router.post('/asistencia', (req, res) => {
+    const { token } = req.body;
+  
+    if (!token) {
+      return res.status(400).json({ error: 'El token es obligatorio.' });
+    }
+  
+    try {
+      const data = jwt.verify(token, SECRET_KEY);
+      const { usuario_id, evento_id } = data;
+      const fechaEntrada = new Date();
+  
+      const query = `
+        INSERT INTO asistencias (usuario_id, evento_id, fecha_entrada, asistencia_confirmada)
+        VALUES (?, ?, ?, ?)`;
+  
+      connection.query(query, [usuario_id, evento_id, fechaEntrada, 1], (err, result) => {
+        if (err) {
+          console.error('Error al registrar asistencia:', err.message);
+          return res.status(500).json({ error: 'Error al registrar asistencia en la base de datos.' });
+        }
+        res.status(201).json({ message: 'Asistencia registrada exitosamente.', asistenciaId: result.insertId });
+      });
+    } catch (error) {
+      console.error('Error al procesar el token:', error.message);
+      res.status(401).json({ error: 'Token inválido o expirado.' });
+    }
+  });
+  
 
 module.exports = router;

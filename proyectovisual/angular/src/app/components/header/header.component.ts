@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common'; // Importa CommonModule
+import { Router } from '@angular/router'; // Importa el Router para redirección
+
 
 @Component({
   selector: 'app-header',
@@ -13,6 +15,7 @@ export class HeaderComponent implements OnInit {
   userName: string | null = null;
   userRole: string | null = null;
 
+  constructor(private router: Router) {} // Inyecta el Router para redirección
 
   ngOnInit() {
     this.userName = localStorage.getItem('userName'); // Obtiene el nombre del usuario de localStorage
@@ -32,6 +35,6 @@ export class HeaderComponent implements OnInit {
   }
 
   isAdmin(): boolean {
-    return this.userRole === 'admin'; // Devuelve true si el rol es "admin"
+    return this.userRole === 'administrador'; // Devuelve true si el rol es "admin"
   }
 }

@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { RegisterComponent } from './components/register/register.component';
+import { AdminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
     {path:"",redirectTo:"inicio",pathMatch:"full"},
@@ -12,7 +13,8 @@ export const routes: Routes = [
     {path:"preguntas", loadComponent:() => import("./components/preguntas/preguntas.component").then(m => m.PreguntasComponent)},
     {path: "form_registro/:evento_id", loadComponent: () => import("./components/form-registro/form-registro.component").then(m => m.FormRegistroComponent) },
     {path:"form_solicitud", loadComponent: () => import("./components/form-solicitud/form-solicitud.component").then(m => m.FormSolicitudComponent)},
-    {path:"administrador", loadComponent: () => import("./components/administrador/administrador.component").then(m => m.AdministradorComponent)},
-    {path:"**", redirectTo:"inicio", pathMatch:"full"}
-    
+    // {path:"administrador", loadComponent: () => import("./components/administrador/administrador.component").then(m => m.AdministradorComponent)},
+    {path: "administrador",loadComponent: () => import("./components/administrador/administrador.component").then(m => m.AdministradorComponent),canActivate: [AdminGuard]},
+    { path: "**", redirectTo: "inicio", pathMatch: "full" },
+        
 ];

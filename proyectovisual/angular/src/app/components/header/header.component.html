@@ -118,9 +118,9 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" routerLink="preguntas">Preguntas Frecuentes</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link active" aria-current="page" routerLink="administrador">Admin</a>
-          </li>
+          </li> -->
         </ul>
 
         <!-- Mostrar nombre del usuario si está autenticado, de lo contrario mostrar enlaces de inicio y registro -->
@@ -135,20 +135,20 @@
           </div>
         </ng-template> -->
 
-        <!-- Mostrar nombre del usuario si está autenticado -->
-  <div *ngIf="userName; else guestLinks">
-    <span>Bienvenido, {{ userName }}</span>
-    <button (click)="logout()" class="btn btn-outline-danger ms-2">Cerrar sesión</button>
-  </div>
-  <ng-template #guestLinks>
-    <a routerLink="/login" class="btn btn-primary me-2">Iniciar sesión</a>
-    <a routerLink="/register" class="btn btn-success">Registrarse</a>
-  </ng-template>
+         <!-- Mostrar nombre del usuario si está autenticado -->
+        <div *ngIf="userName; else guestLinks" class="user-actions">
+          <span>Bienvenido, {{ userName }}</span>
+          <button (click)="logout()" class="btn btn-outline-danger ms-2">Cerrar sesión</button>
 
-  <!-- Botón de administrador (visible solo si el rol es "admin") -->
-  <div *ngIf="isAdmin()">
-    <a routerLink="/administrador" class="btn btn-warning ms-2">Zona Administrador</a>
-  </div>
+          <!-- Botón de administrador (visible solo si el rol es "administrador") -->
+          <a *ngIf="isAdmin()" routerLink="/administrador" class="btn btn-warning ms-2">Zona Administrador</a>
+        </div>
+
+        <!-- Opciones para invitados -->
+        <ng-template #guestLinks>
+          <a routerLink="/login" class="btn btn-primary me-2">Iniciar sesión</a>
+          <a routerLink="/register" class="btn btn-success">Registrarse</a>
+        </ng-template>
       </div>
 
       <!-- Añadir las imágenes -->
