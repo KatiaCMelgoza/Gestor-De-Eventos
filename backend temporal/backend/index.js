@@ -3,9 +3,12 @@ const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken'); // Importación de jsonwebtoken
+const jwt = require('jsonwebtoken'); // Para manejar tokens JWT
+const QRCode = require('qrcode'); // Para generar códigos QR
+const nodemailer = require('nodemailer'); // Para enviar correos
+const qrRoutes = require('./qrRoutes'); // Importa las rutas de QR
 const app = express();
-require('./cronJobs');
+
 
 const PORT = process.env.PORT || 3000; // Define el puerto con variable de entorno o 3000
 const SECRET_KEY = process.env.SECRET_KEY || 'tu_clave_secreta'; // Define SECRET_KEY desde .env o por defecto
@@ -146,7 +149,6 @@ app.post('/api/eventos', (req, res) => {
 });
 
 // Endpoint para obtener eventos pasados::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-// Obtener eventos pasados
 app.get('/api/eventos/pasados', (req, res) => {
   const query = `
     SELECT * FROM Eventos
@@ -205,62 +207,6 @@ app.get('/api/eventos/pasados', (req, res) => {
     res.json(results);
   });
 });
-
-
-//endpoint para que un usuario se inscriba a un evento::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-// Endpoint para registrar solicitantes
-// app.post('/api/registro-solicitantes', (req, res) => {
-//   const {
-//     nombre_completo,
-//     correo,
-//     telefono,
-//     id_universitario,
-//     departamento,
-//     evento_id,
-//     usuario_id
-//   } = req.body;
-
-//   if (!nombre_completo || !correo) {
-//     return res.status(400).json({ error: 'Los campos nombre_completo y correo son obligatorios.' });
-//   }
-
-//   const query = `
-//     INSERT INTO Registro_Solicitantes (nombre_completo, correo, telefono, id_universitario, departamento)
-//     VALUES (?, ?, ?, ?, ?)`;
-
-//   const values = [
-//     nombre_completo,
-//     correo,
-//     telefono || null, // Permitir valores nulos para campos opcionales
-//     id_universitario || null,
-//     departamento || null
-//   ];
-
-//   connection.query(query, values, (err, result) => {
-//     if (err) {
-//       console.error('Error al registrar solicitante:', err);
-//       return res.status(500).json({ error: 'Error al registrar al solicitante.' });
-//     }
-
-//     res.status(201).json({ message: 'Solicitante registrado exitosamente.', solicitanteId: result.insertId });
-//   });
-//   const query2 = 
-//   'INSERT INTO Notificaciones (evento_id, usuario_id) VALUES (?, ?)';
-
-//   const values2 =[
-//     evento_id,
-//     usuario_id
-//   ];
-//   console.log(values2);
-//   connection.query(query2, values2, (err, result) => {
-//     if (err) {
-//       console.error('Error al registrar notificacion:', err);
-//       return res.status(500).json({ error: 'Error al registrar notificacion.' });
-//     }
-
-//     res.status(201).json({ message: 'notficacion registrada con exito', solicitanteId: result.insertId });
-//   });
-// });
 
 app.post('/api/registro-solicitantes', (req, res) => {
   const {
@@ -363,20 +309,6 @@ app.put('/api/administrador/eventos/:id', (req, res) => {
   });
 });
 
-// //crear un espacio
-// app.post('/api/administrador/espacios', (req, res) => {
-//   const { tipo_espacio, nombre, capacidad } = req.body;
-
-//   const query = 'INSERT INTO Espacios (tipo_espacio, nombre, capacidad) VALUES (?, ?, ?)';
-//   connection.query(query, [tipo_espacio, nombre, capacidad], (err, results) => {
-//     if (err) {
-//       console.error('Error al crear espacio:', err);
-//       return res.status(500).send('Error al crear espacio');
-//     }
-//     res.send('Espacio creado exitosamente');
-//   });
-// });
-
 // Endpoint para agregar un espacio
 app.post('/api/administrador/espacios', (req, res) => {
   const { tipo_espacio, nombre, capacidad } = req.body;
@@ -415,6 +347,9 @@ app.get('/api/administrador/espacios', (req, res) => {
 
 //::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
+// Monta las rutas del módulo de QR
+app.use('/api/qr', qrRoutes);
+
 // Ruta protegida
 app.get('/api/protected', authenticateToken, (req, res) => {
   res.json({ message: 'Acceso autorizado', user: req.user });
@@ -424,3 +359,4 @@ app.get('/api/protected', authenticateToken, (req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
+

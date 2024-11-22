@@ -29,15 +29,16 @@ export class LoginComponent {
       (res: any) => {
         // Almacena el token y el nombre en el localStorage
         localStorage.setItem("token", res.token);
-        localStorage.setItem("userName", res.name); // Guardar el nombre del usuario
-        localStorage.setItem("userId", res.userId); // Guardar el userId en localStorage
+        localStorage.setItem("userName", res.name);
+        localStorage.setItem("userId", res.userId.toString()); // Asegurarse de almacenar como string
+        localStorage.setItem("email", this.email); // Almacenar el correo electrónico
 
-          //id en la respuesta
-        // const userId = res.userId || '1'; 
-        // localStorage.setItem("userId", userId); 
-
-        
-
+        console.log("Datos almacenados en localStorage:", {
+          token: res.token,
+          userName: res.name,
+          userId: res.userId,
+          email: this.email
+        }); // Para depuración
   
         // Verificar el valor de 'redirect'
         const redirect = this.route.snapshot.queryParamMap.get('redirect');
