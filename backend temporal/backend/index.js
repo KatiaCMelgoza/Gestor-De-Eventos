@@ -246,10 +246,9 @@ connection.query(capacityQuery, [espacio], (err, results) => {
   SELECT COUNT(*) AS count
   FROM Eventos
   WHERE espacio = ? AND fecha = ? AND (
-    (? >= hora_inicio AND ? <= hora_fin) OR -- Nuevo evento comienza dentro de un evento existente
-    (? <= hora_inicio AND ? >= hora_fin)   -- Nuevo evento envuelve completamente un evento existente
+    (? >= hora_inicio AND ? <= hora_fin) OR 
+    (? <= hora_inicio AND ? >= hora_fin)
   )`;
-
 
     connection.query(
       conflictQuery,

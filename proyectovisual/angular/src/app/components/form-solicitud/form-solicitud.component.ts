@@ -65,17 +65,18 @@ flatpickrOptions = {
         this.router.navigate(['/inicio']);
       },
       (error) => {
-        if (error.status === 400) {
-          alert(error.error.error || JSON.stringify(error.error)); // Muestra el mensaje específico si existe
-        } else if (error.status === 409) {
-          alert('Zona ya ocupada para esta fecha y hora. Por favor, elige otro horario o espacio.');
+        console.error('Error al registrar el evento:', error);
+        if (error.status === 409) {
+          alert(error.error.error || 'Conflicto detectado: Verifica la sala, fecha y hora.');
+        } else if (error.status === 400) {
+          alert('Datos inválidos: ' + JSON.stringify(error.error));
         } else {
-          console.error('Error al registrar el evento:', error);
-          alert('Hubo un error al registrar el evento. Intenta nuevamente.');
+          alert('Ocurrió un error inesperado.');
         }
       }
     );
   }
+  
   
   limpiarFormulario() {
     this.eventoData = {

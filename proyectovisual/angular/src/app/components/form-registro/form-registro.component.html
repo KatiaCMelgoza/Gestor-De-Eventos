@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<!-- <div class="container mt-5">
     <h2 class="text-center">Registro al Evento</h2>
     <form class="row g-3" (ngSubmit)="registrarSolicitante()">
       <div class="col-md-6">
@@ -23,6 +23,86 @@
       </div>
       <div class="col-12">
         <button type="submit" class="btn btn-primary">Registrarse</button>
+      </div>
+    </form>
+  </div>
+   -->
+
+   <div class="container mt-5 p-4 rounded shadow-lg bg-light">
+    <h2 class="text-center mb-4 text-primary">Registro al Evento</h2>
+    <form class="row g-4" (ngSubmit)="registrarSolicitante()">
+      <!-- Nombre Completo -->
+      <div class="col-md-6">
+        <label for="nombre_completo" class="form-label fw-bold">Nombre Completo</label>
+        <input
+          type="text"
+          class="form-control border-primary"
+          id="nombre_completo"
+          placeholder="Escribe tu nombre completo"
+          [(ngModel)]="registroData.nombre_completo"
+          name="nombre_completo"
+          required
+        />
+      </div>
+  
+      <!-- Correo Electrónico -->
+      <div class="col-md-6">
+        <label for="correo" class="form-label fw-bold">Correo Electrónico</label>
+        <input
+          type="email"
+          class="form-control border-primary"
+          id="correo"
+          placeholder="ejemplo@correo.com"
+          [(ngModel)]="registroData.correo"
+          name="correo"
+          required
+        />
+      </div>
+  
+      <!-- Teléfono -->
+      <div class="col-md-6">
+        <label for="telefono" class="form-label fw-bold">Teléfono</label>
+        <input
+          type="text"
+          class="form-control border-primary"
+          id="telefono"
+          placeholder="123-456-7890"
+          [(ngModel)]="registroData.telefono"
+          name="telefono"
+        />
+      </div>
+  
+      <!-- ID Universitario -->
+      <div class="col-md-6">
+        <label for="id_universitario" class="form-label fw-bold">ID Universitario</label>
+        <input
+          type="text"
+          class="form-control border-primary"
+          id="id_universitario"
+          placeholder="Escribe tu ID universitario"
+          [(ngModel)]="registroData.id_universitario"
+          name="id_universitario"
+        />
+      </div>
+  
+      <!-- Departamento -->
+      <div class="col-md-12">
+        <label for="departamento" class="form-label fw-bold">Departamento</label>
+        <input
+          type="text"
+          class="form-control border-primary"
+          id="departamento"
+          placeholder="Escribe tu departamento"
+          [(ngModel)]="registroData.departamento"
+          name="departamento"
+        />
+      </div>
+  
+      <!-- Botón para Registrarse -->
+      <div class="col-12 text-center">
+        <button type="submit" class="btn btn-primary btn-lg px-5 shadow">
+          <i class="bi bi-person-plus"></i> Registrarse
+        </button>
       </div>
     </form>
   </div>
