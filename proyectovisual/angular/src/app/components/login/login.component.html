@@ -1,23 +1,54 @@
-<form (ngSubmit)="login()">
-  <div class="mb-3">
-    <label for="loginEmail" class="form-label">Correo Electrónico</label>
-    <div class="input-group">
-      <span class="input-group-text"><i class="bi bi-person"></i></span>
-      <input type="text" class="form-control" id="loginEmail" [(ngModel)]="email" name="email" placeholder="Correo electrónico" required>
-    </div>
+<div class="login-container">
+  <div class="login-card shadow">
+    <h2 class="mb-4 text-primary fw-bold">Login</h2>
+    <form (ngSubmit)="login()">
+      <!-- Username -->
+      <div class="mb-3">
+        <label for="loginEmail" class="form-label">Correo Electrónico</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-person"></i></span>
+          <input
+            type="text"
+            class="form-control"
+            id="loginEmail"
+            [(ngModel)]="email"
+            name="email"
+            placeholder="Correo electrónico"
+            required
+          />
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="loginPassword" class="form-label">Contraseña</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-lock"></i></span>
+          <input
+            type="password"
+            class="form-control"
+            id="loginPassword"
+            [(ngModel)]="password"
+            name="password"
+            placeholder="Contraseña"
+            required
+          />
+        </div>
+        <small class="form-text text-end">
+          <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
+        </small>
+      </div>
+
+      <!-- Login Button -->
+      <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+
+      <!-- Registration Link -->
+      <div class="text-center mt-3">
+        <p>
+          ¿No tienes una cuenta?
+          <a routerLink="/registro" class="register-link">Regístrate aquí</a>
+        </p>
+      </div>
+    </form>
   </div>
-  <div class="mb-3">
-    <label for="loginPassword" class="form-label">Contraseña</label>
-    <div class="input-group">
-      <span class="input-group-text"><i class="bi bi-lock"></i></span>
-      <input type="password" class="form-control" id="loginPassword" [(ngModel)]="password" name="password" placeholder="Contraseña" required>
-    </div>
-    <small class="form-text text-end"><a href="#">¿Olvidaste tu contraseña?</a></small>
-  </div>
-  <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
-  
-  <!-- Enlace para registrarse -->
-  <div class="text-center mt-3">
-    <p>¿No tienes una cuenta? <a routerLink="/registro">Regístrate aquí</a></p>
-  </div>
-</form>
+</div>
