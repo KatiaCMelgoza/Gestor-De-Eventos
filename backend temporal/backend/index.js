@@ -8,6 +8,7 @@ const QRCode = require('qrcode'); // Para generar códigos QR
 const nodemailer = require('nodemailer'); // Para enviar correos
 const qrRoutes = require('./qrRoutes'); // Importa las rutas de QR
 const app = express();
+const router = express.Router(); // Esto define el router
 require('./cronJobs'); // Importa y ejecuta el archivo de cron jobs
 
 
@@ -61,6 +62,42 @@ app.post('/api/register', async (req, res) => {
       return res.status(201).json({ message: 'Usuario registrado con éxito', userId: result.insertId });
     }
   });
+});
+
+//endpoint para registrar asistencias::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+// Endpoint para registrar asistencia
+router.post('/asistencia', async (req, res) => {
+  const { token } = req.body;
+
+  if (!token) {
+    return res.status(400).json({ error: 'El token es obligatorio.' });
+  }
+
+  try {
+    const data = jwt.verify(token, SECRET_KEY);
+    const { usuario_id, evento_id } = data;
+    const fechaEntrada = new Date();
+
+    // Verificar si ya existe un registro de asistencia
+    const checkQuery = `
+      SELECT COUNT(*) AS count FROM asistencias 
+      WHERE usuario_id = ? AND evento_id = ?`;
+    const [rows] = await connection.promise().query(checkQuery, [usuario_id, evento_id]);
+    if (rows[0].count > 0) {
+      return res.status(409).json({ error: 'Asistencia ya registrada para este evento y usuario.' });
+    }
+
+    // Insertar asistencia
+    const insertQuery = `
+      INSERT INTO asistencias (usuario_id, evento_id, fecha_entrada, asistencia_confirmada)
+      VALUES (?, ?, ?, ?)`;
+    const [result] = await connection.promise().query(insertQuery, [usuario_id, evento_id, fechaEntrada, 1]);
+
+    res.status(201).json({ message: 'Asistencia registrada exitosamente.', asistenciaId: result.insertId });
+  } catch (error) {
+    console.error('Error al procesar el token:', error.message);
+    res.status(401).json({ error: 'Token inválido o expirado.' });
+  }
 });
 
 // // Endpoint para iniciar sesión::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -179,32 +216,115 @@ app.post('/api/eventos', (req, res) => {
     tiempo_desmontaje
   } = req.body;
 
-  const query = `
-    INSERT INTO Eventos (nombre, descripcion, tipo, numero_asistentes, tipo_audiencia, requiere_registro, espacio, fecha, hora_inicio, hora_fin, tiempo_montaje, tiempo_desmontaje, estado)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pendiente')`;
+ // Validar que los campos obligatorios estén presentes
+ if (!espacio || !fecha || !hora_inicio || !hora_fin || !numero_asistentes) {
+  return res.status(400).json({ error: 'Espacio, fecha y horarios son obligatorios.' });
+}
 
-  const values = [
-    nombre,
-    descripcion,
-    tipo,
-    numero_asistentes,
-    tipo_audiencia,
-    requiere_registro,
-    espacio,
-    fecha,
-    hora_inicio,
-    hora_fin,
-    tiempo_montaje,
-    tiempo_desmontaje
-  ];
+// Verificar la capacidad del espacio
+const capacityQuery = `SELECT capacidad FROM Espacios WHERE nombre = ?`;
+connection.query(capacityQuery, [espacio], (err, results) => {
+  if (err) {
+    console.error('Error al verificar la capacidad del espacio:', err);
+    return res.status(500).json({ error: 'Error al verificar la capacidad del espacio.' });
+  }
 
-  connection.query(query, values, (err) => {
-    if (err) {
-      console.error('Error al registrar el evento:', err);
-      return res.status(500).json({ error: 'Error al registrar el evento' });
-    }
+  if (results.length === 0) {
+    return res.status(404).json({ error: 'El espacio seleccionado no existe.' });
+  }
 
-    res.status(201).json({ message: 'Evento registrado exitosamente con estado pendiente.' });
+  const capacidadEspacio = results[0].capacidad;
+
+  if (numero_asistentes > capacidadEspacio) {
+    return res.status(400).json({
+      error: `La cantidad de asistentes (${numero_asistentes}) excede la capacidad del espacio (${capacidadEspacio}).`
+    });
+  }  
+
+      // Verificar si ya existe un evento en el mismo espacio, fecha y horario
+  const conflictQuery = `
+  SELECT COUNT(*) AS count
+  FROM Eventos
+  WHERE espacio = ? AND fecha = ? AND (
+    (? >= hora_inicio AND ? <= hora_fin) OR -- Nuevo evento comienza dentro de un evento existente
+    (? <= hora_inicio AND ? >= hora_fin)   -- Nuevo evento envuelve completamente un evento existente
+  )`;
+
+
+    connection.query(
+      conflictQuery,
+      [espacio, fecha, hora_fin, hora_inicio, hora_inicio, hora_fin],
+      (err, results) => {
+
+        if (err) {
+          console.error('Error al verificar conflictos:', err);
+          return res.status(500).json({ error: 'Error al verificar conflictos.' });
+        }
+  
+        if (results[0].count > 0) {
+        // Si hay conflicto, devolver un error
+        return res.status(409).json({ error: 'Zona ya ocupada para esta fecha y hora.' });
+      }
+
+//   const query = `
+//     INSERT INTO Eventos (nombre, descripcion, tipo, numero_asistentes, tipo_audiencia, requiere_registro, espacio, fecha, hora_inicio, hora_fin, tiempo_montaje, tiempo_desmontaje, estado)
+//     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pendiente')`;
+
+//   const values = [
+//     nombre,
+//     descripcion,
+//     tipo,
+//     numero_asistentes,
+//     tipo_audiencia,
+//     requiere_registro,
+//     espacio,
+//     fecha,
+//     hora_inicio,
+//     hora_fin,
+//     tiempo_montaje,
+//     tiempo_desmontaje
+//   ];
+
+//   connection.query(query, values, (err) => {
+//     if (err) {
+//       console.error('Error al registrar el evento:', err);
+//       return res.status(500).json({ error: 'Error al registrar el evento' });
+//     }
+
+//     res.status(201).json({ message: 'Evento registrado exitosamente con estado pendiente.' });
+//   });
+// });
+
+// Si no hay conflicto, proceder con el registro
+const insertQuery = `
+INSERT INTO Eventos (nombre, descripcion, tipo, numero_asistentes, tipo_audiencia, requiere_registro, espacio, fecha, hora_inicio, hora_fin, tiempo_montaje, tiempo_desmontaje, estado)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pendiente')`;
+
+const values = [
+nombre,
+descripcion,
+tipo,
+numero_asistentes,
+tipo_audiencia,
+requiere_registro,
+espacio,
+fecha,
+hora_inicio,
+hora_fin,
+tiempo_montaje,
+tiempo_desmontaje
+];
+
+connection.query(insertQuery, values, (err) => {
+if (err) {
+  console.error('Error al registrar el evento:', err);
+  return res.status(500).json({ error: 'Error al registrar el evento.' });
+}
+
+res.status(201).json({ message: 'Evento registrado exitosamente con estado pendiente.' });
+        });
+      }
+    );
   });
 });
 
@@ -224,21 +344,21 @@ app.get('/api/eventos/pasados', (req, res) => {
   });
 });
 
-// Obtener eventos pasados
-app.get('/api/eventos/pasados', (req, res) => {
-  const query = `
-    SELECT * FROM Eventos
-    WHERE estado = 'pasado';`;
+// // Obtener eventos pasados:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+// app.get('/api/eventos/pasados', (req, res) => {
+//   const query = `
+//     SELECT * FROM Eventos
+//     WHERE estado = 'pasado';`;
 
-  connection.query(query, (err, results) => {
-    if (err) {
-      console.error('Error al obtener eventos pasados:', err);
-      return res.status(500).json({ error: 'Error al obtener eventos pasados.' });
-    }
+//   connection.query(query, (err, results) => {
+//     if (err) {
+//       console.error('Error al obtener eventos pasados:', err);
+//       return res.status(500).json({ error: 'Error al obtener eventos pasados.' });
+//     }
 
-    res.json(results);
-  });
-});
+//     res.json(results);
+//   });
+// });
 
 //endpoint para mostrar eventos aporbados unicamente en la pagina proximos eventos
 app.get('/api/eventos/aprobados', (req, res) => {

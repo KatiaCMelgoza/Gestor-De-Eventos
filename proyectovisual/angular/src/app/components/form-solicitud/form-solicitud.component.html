@@ -1,9 +1,38 @@
 <div class="container mt-5">
-  <h2>Registrar Nuevo Evento</h2>
-  <form (ngSubmit)="registrarEvento()" #eventoForm="ngForm">
+  <h2 class="text-center mb-4">Registrar Nuevo Evento</h2>
+  <form (ngSubmit)="registrarEvento()" #eventoForm="ngForm" class="shadow p-4 rounded bg-light">
+    <!-- Espacio -->
+    <div class="mb-4">
+      <label for="espacio" class="form-label fw-bold">Espacio:</label>
+      <select
+        id="espacio"
+        class="form-select"
+        [(ngModel)]="eventoData.espacio"
+        name="espacio"
+        required
+      >
+        <option *ngFor="let espacio of espacios" [value]="espacio.nombre">
+          {{ espacio.nombre }} (Capacidad: {{ espacio.capacidad }}, Tipo: {{ espacio.tipo_espacio }})
+        </option>
+      </select>
+    </div>
+
+    <!-- Número de Asistentes -->
+    <div class="mb-4">
+      <label for="numero_asistentes" class="form-label fw-bold">Número de Asistentes:</label>
+      <input
+        type="number"
+        id="numero_asistentes"
+        class="form-control"
+        [(ngModel)]="eventoData.numero_asistentes"
+        name="numero_asistentes"
+        required
+      />
+    </div>
+
     <!-- Nombre del Evento -->
-    <div class="mb-3">
-      <label for="nombre" class="form-label">Nombre del Evento:</label>
+    <div class="mb-4">
+      <label for="nombre" class="form-label fw-bold">Nombre del Evento:</label>
       <input
         type="text"
         id="nombre"
@@ -15,20 +44,21 @@
     </div>
 
     <!-- Descripción -->
-    <div class="mb-3">
-      <label for="descripcion" class="form-label">Descripción:</label>
+    <div class="mb-4">
+      <label for="descripcion" class="form-label fw-bold">Descripción:</label>
       <textarea
         id="descripcion"
         class="form-control"
         [(ngModel)]="eventoData.descripcion"
         name="descripcion"
         required
+        rows="3"
       ></textarea>
     </div>
 
     <!-- Tipo de Evento -->
-    <div class="mb-3">
-      <label for="tipo" class="form-label">Tipo de Evento:</label>
+    <div class="mb-4">
+      <label for="tipo" class="form-label fw-bold">Tipo de Evento:</label>
       <select
         id="tipo"
         class="form-select"
@@ -44,22 +74,9 @@
       </select>
     </div>
 
-    <!-- Número de Asistentes -->
-    <div class="mb-3">
-      <label for="numero_asistentes" class="form-label">Número de Asistentes:</label>
-      <input
-        type="number"
-        id="numero_asistentes"
-        class="form-control"
-        [(ngModel)]="eventoData.numero_asistentes"
-        name="numero_asistentes"
-        required
-      />
-    </div>
-
     <!-- Tipo de Audiencia -->
-    <div class="mb-3">
-      <label for="tipo_audiencia" class="form-label">Tipo de Audiencia:</label>
+    <div class="mb-4">
+      <label for="tipo_audiencia" class="form-label fw-bold">Tipo de Audiencia:</label>
       <select
         id="tipo_audiencia"
         class="form-select"
@@ -73,29 +90,18 @@
     </div>
 
     <!-- Requiere Registro -->
-    <div class="mb-3">
-      <label for="requiere_registro" class="form-label">Requiere Registro:</label>
+    <div class="form-check mb-4">
       <input
         type="checkbox"
         id="requiere_registro"
+        class="form-check-input"
         [(ngModel)]="eventoData.requiere_registro"
         name="requiere_registro"
       />
+      <label for="requiere_registro" class="form-check-label fw-bold">Requiere Registro</label>
     </div>
 
-    <!-- Espacio -->
-    <div class="mb-3">
-      <label for="espacio" class="form-label">Espacio:</label>
-      <input
-        type="text"
-        id="espacio"
-        class="form-control"
-        [(ngModel)]="eventoData.espacio"
-        name="espacio"
-      />
-    </div>
-
-    <!-- Fecha -->
+    <!-- Campo de Fecha -->
     <div class="mb-3">
       <label for="fecha" class="form-label">Fecha del Evento:</label>
       <input
@@ -107,10 +113,9 @@
         required
       />
     </div>
-
     <!-- Hora de Inicio -->
-    <div class="mb-3">
-      <label for="hora_inicio" class="form-label">Hora de Inicio:</label>
+    <div class="mb-4">
+      <label for="hora_inicio" class="form-label fw-bold">Hora de Inicio:</label>
       <input
         type="time"
         id="hora_inicio"
@@ -122,8 +127,8 @@
     </div>
 
     <!-- Hora de Fin -->
-    <div class="mb-3">
-      <label for="hora_fin" class="form-label">Hora de Fin:</label>
+    <div class="mb-4">
+      <label for="hora_fin" class="form-label fw-bold">Hora de Fin:</label>
       <input
         type="time"
         id="hora_fin"
@@ -135,8 +140,8 @@
     </div>
 
     <!-- Tiempo de Montaje -->
-    <div class="mb-3">
-      <label for="tiempo_montaje" class="form-label">Tiempo de Montaje (HH:MM:SS):</label>
+    <div class="mb-4">
+      <label for="tiempo_montaje" class="form-label fw-bold">Tiempo de Montaje:</label>
       <input
         type="time"
         id="tiempo_montaje"
@@ -147,8 +152,8 @@
     </div>
 
     <!-- Tiempo de Desmontaje -->
-    <div class="mb-3">
-      <label for="tiempo_desmontaje" class="form-label">Tiempo de Desmontaje (HH:MM:SS):</label>
+    <div class="mb-4">
+      <label for="tiempo_desmontaje" class="form-label fw-bold">Tiempo de Desmontaje:</label>
       <input
         type="time"
         id="tiempo_desmontaje"
@@ -159,12 +164,14 @@
     </div>
 
     <!-- Botón para Enviar -->
-    <button
-      type="submit"
-      class="btn btn-primary"
-      [disabled]="!eventoForm.valid"
-    >
-      Registrar Evento
-    </button>
+    <div class="text-center">
+      <button
+        type="submit"
+        class="btn btn-primary btn-lg"
+        [disabled]="!eventoForm.valid"
+      >
+        Registrar Evento
+      </button>
+    </div>
   </form>
 </div>
