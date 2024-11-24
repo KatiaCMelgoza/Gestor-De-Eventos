@@ -4,12 +4,11 @@ const mysql = require('mysql2');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken'); // Para manejar tokens JWT
-const QRCode = require('qrcode'); // Para generar códigos QR
-const nodemailer = require('nodemailer'); // Para enviar correos
-const qrRoutes = require('./qrRoutes'); // Importa las rutas de QR
 const app = express();
 const router = express.Router(); // Esto define el router
 require('./cronJobs'); // Importa y ejecuta el archivo de cron jobs
+const qrRoutes = require('./qrRoutes'); // Importa las rutas de QR
+
 
 
 const PORT = process.env.PORT || 3000; // Define el puerto con variable de entorno o 3000
