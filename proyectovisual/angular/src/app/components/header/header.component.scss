@@ -1,13 +1,16 @@
 /* Barra de navegación */
 .navbar {
-    background-color: #005f68; /* Color de fondo del menú */
-    font-family: Arial, Tahoma, sans-serif; /* Tipografía */
-    font-size: 18px; /* Tamaño de la fuente */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-  }
+  background-color: #005f68; /* Color de fondo del menú */
+  font-family: Arial, Tahoma, sans-serif; /* Tipografía */
+  font-size: 18px; /* Tamaño de la fuente */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  position: relative; /* Asegura que no interfiera con el flujo del documento */
+  z-index: 10; /* Coloca la barra encima de otros elementos si es necesario */
+}
+
   
   /* Menú principal */
   .menu {
