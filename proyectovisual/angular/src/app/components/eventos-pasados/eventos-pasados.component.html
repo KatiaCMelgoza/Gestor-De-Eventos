@@ -3,9 +3,9 @@
     <div class="row">
       <div *ngFor="let evento of eventosPasados" class="col-md-4 mb-4">
         <div class="card">
-          <a href="" target="_blank">
+          <!-- <a href="" target="_blank">
             <img [src]="evento.imagen || '../../../assets/default.jpg'" alt="evento" class="card-img-top">
-          </a>
+          </a> -->
           <div class="card-body">
             <h5 class="card-title">{{ evento.nombre }}</h5>
             <p class="card-text"><strong>Fecha:</strong> {{ evento.fecha | date }}</p>
