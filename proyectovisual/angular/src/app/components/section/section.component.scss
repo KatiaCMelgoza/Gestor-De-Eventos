@@ -1,7 +1,6 @@
 .video-section {
     width: 100vw;
     max-width: 100vw;
-    background-color: #000; /* Fondo negro */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,4 +10,16 @@
 .full-width-video {
     width: 100%;
     height: auto; /* Asegura que el video mantenga sus proporciones */
+}
+
+.full-width-gif {
+    width: 100%;        /* Ocupar el ancho completo */
+    height: auto;       /* Mantener proporción */
+    display: block;     /* Evitar margen extra */
+}
+
+.gif-section {
+    width: 100vw;       /* Asegura que ocupe todo el ancho de la ventana */
+    max-width: 100vw;   /* Evita que se desborde */
+    overflow: hidden;   /* Oculta cualquier desbordamiento */
 }
