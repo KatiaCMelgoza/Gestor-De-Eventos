@@ -1,60 +1,115 @@
 <form [formGroup]="formUser" (ngSubmit)="sendDataToService()" class="formulario">
-    <h1>Regístrate</h1>
-  
-    <div class="contenedor">
-      <!-- Campos del formulario (igual que antes) -->
-      <div class="input-contenedor">
-        <label>Nombre</label>
-        <input type="text" placeholder="Nombre(s)" formControlName="nombre" class="form-control">
-      </div>
-      <div class="input-contenedor">
-        <label>Apellidos</label>
-        <input type="text" placeholder="Apellidos" formControlName="apellido" class="form-control">
-      </div>
-      <div class="input-contenedor">
-        <label>Teléfono</label>
-        <input type="tel" placeholder="Teléfono" formControlName="telefono" class="form-control">
-      </div>
-      <div class="input-contenedor">
-        <label>Correo Electrónico</label>
-        <input type="email" placeholder="Correo Electrónico" formControlName="correo_electronico" class="form-control">
-      </div>
-      <div class="input-contenedor">
-        <label>Contraseña</label>
-        <input type="password" placeholder="Contraseña" formControlName="password" class="form-control">
-      </div>
-      <div class="input-contenedor">
-        <label>Rol</label>
-        <select formControlName="rol" class="form-control">
-          <option value="" disabled selected>Selecciona tu rol</option>
-          <option value="organizador">Organizador</option>
-          <option value="participante">Participante</option>
-          <option value="administrador">Administrador</option>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-primary">Regístrate</button>
-      <p class="text-center mt-3">¿Ya tienes cuenta? <a routerLink="/login" class="link">Iniciar Sesión</a></p>
+  <h1>Regístrate</h1>
+
+  <div class="contenedor">
+    <!-- Nombre -->
+    <div class="input-contenedor">
+      <label>Nombre</label>
+      <input
+        type="text"
+        placeholder="Nombre(s)"
+        formControlName="nombre"
+        class="form-control"
+        required
+      />
     </div>
-  </form>
-  
-  <!-- Toast de Bootstrap -->
-  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1055">
-    <div
-      id="liveToast"
-      class="toast"
-      role="alert"
-      aria-live="assertive"
-      aria-atomic="true"
-      [ngClass]="{'bg-success text-white': isSuccess, 'bg-danger text-white': !isSuccess}"
-      [class.show]="showToast">
-      <div class="toast-header">
-        <strong class="me-auto">{{ isSuccess ? 'Éxito' : 'Error' }}</strong>
-        <button type="button" class="btn-close" (click)="closeToast()" aria-label="Close"></button>
-      </div>
-      <div class="toast-body">
-        {{ toastMessage }}
-      </div>
+
+    <!-- Apellidos -->
+    <div class="input-contenedor">
+      <label>Apellidos</label>
+      <input
+        type="text"
+        placeholder="Apellidos"
+        formControlName="apellido"
+        class="form-control"
+        required
+      />
     </div>
+
+    <!-- Teléfono -->
+    <div class="input-contenedor">
+      <label>Teléfono</label>
+      <input
+        type="tel"
+        placeholder="Teléfono"
+        formControlName="telefono"
+        class="form-control"
+        required
+      />
+    </div>
+
+    <!-- Correo Electrónico -->
+    <div class="input-contenedor">
+      <label>Correo Electrónico</label>
+      <input
+        type="email"
+        placeholder="Correo Electrónico"
+        formControlName="correo_electronico"
+        class="form-control"
+        required
+      />
+    </div>
+
+    <!-- Contraseña -->
+    <div class="input-contenedor">
+      <label>Contraseña</label>
+      <input
+        type="password"
+        placeholder="Contraseña"
+        formControlName="password"
+        class="form-control"
+        required
+      />
+    </div>
+
+    <!-- Rol -->
+    <div class="input-contenedor">
+      <label>Rol</label>
+      <select formControlName="rol" class="form-control" required>
+        <option value="" disabled selected>Selecciona tu rol</option>
+        <option value="organizador">Organizador</option>
+        <option value="participante">Participante</option>
+        <option value="administrador">Administrador</option>
+      </select>
+    </div>
+
+    <!-- Botón de registro -->
+    <button type="submit" class="btn btn-gradient">Regístrate</button>
+
+    <!-- Enlace a iniciar sesión -->
+    <p class="text-center mt-3">
+      ¿Ya tienes cuenta?
+      <a routerLink="/login" class="link">Iniciar Sesión</a>
+    </p>
   </div>
-  
-  
+</form>
+
+<!-- Toast de Bootstrap -->
+<div
+  class="toast-container position-fixed bottom-0 end-0 p-3"
+  style="z-index: 1055"
+>
+  <div
+    id="liveToast"
+    class="toast"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+    [ngClass]="{
+      'bg-success text-white': isSuccess,
+      'bg-danger text-white': !isSuccess
+    }"
+    [class.show]="showToast"
+  >
+    <div class="toast-header">
+      <strong class="me-auto">{{ isSuccess ? 'Éxito' : 'Error' }}</strong>
+      <button
+        type="button"
+        class="btn-close"
+        (click)="closeToast()"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="toast-body">{{ toastMessage }}</div>
+  </div>
+</div>
