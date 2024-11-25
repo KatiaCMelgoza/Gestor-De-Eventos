@@ -1,112 +1,184 @@
 /* Barra de navegación */
 .navbar {
-  background-color: #005f68; /* Color de fondo del menú */
-  font-family: Arial, Tahoma, sans-serif; /* Tipografía */
-  font-size: 18px; /* Tamaño de la fuente */
+  background-color: #005f68; /* Fondo del menú */
+  font-family: Arial, Tahoma, sans-serif; /* Fuente principal */
+  font-size: 18px; /* Tamaño de fuente */
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  position: relative; /* Asegura que no interfiera con el flujo del documento */
-  z-index: 10; /* Coloca la barra encima de otros elementos si es necesario */
+  position: relative; /* Para evitar problemas de flujo */
+  z-index: 10; /* Coloca la barra sobre otros elementos */
 }
 
-  
-  /* Menú principal */
+/* Menú principal */
+.menu {
+  list-style: none; /* Elimina los puntos de lista */
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0; /* Quitar márgenes adicionales */
+}
+
+/* Estilo de los enlaces del menú */
+.menu li {
+  position: relative; /* Necesario para posicionar submenús */
+  margin: 0 15px; /* Espaciado entre elementos */
+}
+
+.menu li a {
+  text-decoration: none; /* Elimina subrayado */
+  color: white; /* Texto blanco */
+  padding: 10px 15px;
+  display: block;
+  font-weight: 600;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.menu li a:hover {
+  color: #005f68; /* Texto cambia a color del fondo */
+  background-color: white; /* Fondo blanco al pasar el ratón */
+  border-radius: 4px; /* Bordes redondeados */
+}
+
+/* Submenú */
+.submenu {
+  display: none; /* Ocultar submenú por defecto */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white; /* Fondo blanco */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra del submenú */
+  padding: 0;
+  z-index: 1;
+  border-radius: 4px; /* Bordes redondeados */
+  list-style: none;
+  min-width: 200px; /* Ancho mínimo */
+}
+
+.menu li:hover > .submenu {
+  display: block; /* Mostrar submenú al hacer hover */
+}
+
+/* Estilo de los enlaces del submenú */
+.submenu li a {
+  padding: 10px 15px;
+  color: #333; /* Texto negro */
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+.submenu li a:hover {
+  background-color: gainsboro; /* Fondo gris claro en hover */
+}
+
+/* Contenedor de logos */
+.menu-logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px; /* Espaciado entre imágenes */
+}
+
+/* Estilo de las imágenes del logo */
+.menu-image {
+  width: 150px; /* Ancho máximo */
+  height: auto; /* Mantener proporción */
+  margin-left: 15px; /* Espaciado entre imágenes */
+  transition: transform 0.3s; /* Animación al hacer hover */
+}
+
+.menu-image:hover {
+  transform: scale(1.05); /* Efecto de aumento al pasar el ratón */
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px;
+  }
+
   .menu {
-    list-style: none; /* Quitar puntos de lista */
-    display: flex;
-    align-items: center;
-    padding: 0;
+    flex-direction: column; /* Apilar elementos verticalmente */
+    align-items: flex-start; /* Alinear a la izquierda */
+    margin: 10px 0; /* Agregar separación */
   }
-  
-  /* Estilo de los enlaces del menú */
-  .menu li {
-    position: relative; /* Para los submenús */
-    margin: 0 15px; /* Espaciado entre elementos */
-  }
-  
-  .menu li a {
-    text-decoration: none;
-    color: white; /* Texto blanco */
-    padding: 10px 15px;
-    display: block;
-    font-weight: 600;
-    transition: color 0.3s, background-color 0.3s;
-  }
-  
-  .menu li a:hover {
-    color: #005f68; /* Texto cambia a color de fondo en hover */
-    background-color: white; /* Fondo blanco en hover */
-    border-radius: 4px; /* Bordes redondeados */
-  }
-  
-  /* Submenú */
+
   .submenu {
-    display: none; /* Ocultar submenú por defecto */
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: white;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 0;
-    z-index: 1;
-    border-radius: 4px;
-    list-style: none;
-    min-width: 200px;
+    position: static; /* Ajustar posición del submenú */
+    box-shadow: none;
   }
-  
-  .menu li:hover > .submenu {
-    display: block; /* Mostrar submenú al hacer hover */
-  }
-  
-  /* Estilo de los enlaces del submenú */
-  .submenu li a {
-    padding: 10px 15px;
-    color: #333; /* Color negro */
-    text-align: left;
-    display: flex;
-    align-items: center;
-  }
-  
-  .submenu li a:hover {
-    background-color: gainsboro; /* Fondo gris claro en hover */
-  }
-  
-  /* Posicionar las imágenes al final del menú */
+
   .menu-logo {
-    display: flex;
-    align-items: center;
-    margin-left: auto; /* Empujar hacia la derecha */
+    margin-top: 15px; /* Espaciado adicional para imágenes */
   }
-  
+
   .menu-image {
-    height: 50px; /* Tamaño de las imágenes */
-    margin-left: 15px; /* Espaciado entre imágenes */
+    width: 120px; /* Reducir tamaño en pantallas pequeñas */
   }
-  
-  /* Ajuste responsivo */
-  @media (max-width: 768px) {
-    .navbar {
-      padding: 10px;
-    }
-  
-    .menu {
-      flex-direction: column; /* Apilar elementos verticalmente */
-      align-items: flex-start;
-    }
-  
-    .submenu {
-      position: static; /* Ajustar posición del submenú */
-      box-shadow: none;
-    }
-  
-    .menu-logo {
-      margin-top: 15px; /* Espaciado adicional para imágenes */
-    }
-  
-    .menu-image {
-      height: 40px; /* Reducir tamaño en pantallas pequeñas */
-    }
-  }
-  
+}
+
+/* Estilos para usuario autenticado */
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaciado entre botones */
+}
+
+.user-actions span {
+  color: white;
+  font-weight: bold;
+}
+
+.user-actions button {
+  font-size: 14px;
+}
+
+/* Botones */
+.btn {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.btn-outline-danger {
+  background-color: transparent;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
