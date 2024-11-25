@@ -8,12 +8,14 @@
     <!-- Lista de eventos pendientes -->
     <div *ngFor="let evento of eventos" class="card mb-3">
       <div class="card-body">
-        <h5 class="card-title">{{ evento.nombre }}</h5>
+        <h5 class="card-title"> <b>{{ evento.nombre }}</b></h5>
         <p class="card-text">
           <strong>Descripción:</strong> {{ evento.descripcion }}<br />
           <strong>Tipo:</strong> {{ evento.tipo }}<br />
           <strong>Fecha:</strong> {{ evento.fecha }}<br />
-          <strong>Hora:</strong> {{ evento.hora_inicio }} - {{ evento.hora_fin }}
+          <strong>Hora:</strong> {{ evento.hora_inicio }} - {{ evento.hora_fin }} <br>
+          <strong>Montaje:</strong> {{ evento.tiempo_montaje }} <br>
+          <strong>Desmontaje:</strong> {{evento.tiempo_desmontaje}} <br>
         </p>
         <!-- Botones para aprobar o rechazar -->
         <button
