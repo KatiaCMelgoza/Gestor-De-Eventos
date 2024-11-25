@@ -66,7 +66,7 @@
         <!-- Acciones del usuario -->
         <div *ngIf="userName; else guestLinks" class="user-actions">
           <span>Bienvenido, {{ userName }}</span>
-          <button (click)="logout()" class="btn btn-outline-danger ms-2">Cerrar sesión</button>
+          <button (click)="logout()" routerLink="/inicio" class="btn btn-outline-danger ms-2">Cerrar sesión</button>
 
           <!-- Botón de administrador -->
           <a *ngIf="isAdmin()" routerLink="/administrador" class="btn btn-warning ms-2">Zona Administrador</a>
