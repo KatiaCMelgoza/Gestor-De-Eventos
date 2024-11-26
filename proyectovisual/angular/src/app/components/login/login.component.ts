@@ -44,13 +44,23 @@ export class LoginComponent {
   
         // Verificar el valor de 'redirect'
         const redirect = this.route.snapshot.queryParamMap.get('redirect');
-        console.log("Redirect parameter:", redirect); // Depuración
+        const eventoId = this.route.snapshot.queryParamMap.get('evento_id');
   
-        if (redirect === 'form_registro') {
-          console.log("Redirigiendo al formulario de registro de eventos..."); // Este console.log adicional
-          this.router.navigate(["/form_registro"]);
+        if (redirect === 'form_registro' && eventoId) {
+          console.log(`Redirigiendo al formulario de registro del evento con ID: ${eventoId}`);
+          this.router.navigate(["/form_registro", eventoId]).then(() => {
+            window.location.reload(); // Refrescar tras redirigir
+          });
+        } else if (redirect) {
+          console.log(`Redirigiendo a ${redirect}`);
+          this.router.navigate([`/${redirect}`]).then(() => {
+            window.location.reload(); // Refrescar tras redirigir
+          });
         } else {
-          this.router.navigate(["/inicio"]);
+          console.log("Redirigiendo a la página de inicio...");
+          this.router.navigate(["/inicio"]).then(() => {
+            window.location.reload(); // Refrescar tras redirigir
+          });
         }
       },
       (error) => {
